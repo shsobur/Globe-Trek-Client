@@ -1,25 +1,25 @@
-import { auth } from "../Firebase/firebase.config";
+// File path__
+import auth from "../Firebase/firebase.config";
 
 // Imported package__
 import {
   signOut,
   updateProfile,
   signInWithPopup,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
 
 // From react__
 import { createContext, useEffect, useState } from "react";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(true);
@@ -104,20 +104,12 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setUserLoading(false);
-
-      if (currentUser) {
-        const userEmail = { email: currentUser.email };
-
-        axiosPublic.post("/jwt", userEmail).then((res) => {
-          console.log(res.data);
-        });
-      }
     });
 
     return () => {
       unsubscribe();
     };
-  }, [axiosPublic]);
+  }, []);
 
   const authInfo = {
     user,

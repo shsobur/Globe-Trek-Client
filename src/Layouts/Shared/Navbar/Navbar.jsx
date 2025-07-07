@@ -19,7 +19,6 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 // From react__
 import { use, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import useUserData from "../../../Hooks/useUserData";
 
 const Navbar = () => {
   const menuRef = useRef();
@@ -27,8 +26,6 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { currentUserData } = useUserData();
-  const userRole = currentUserData?.userRole;
 
   // Handle Close Dropdown__
   useEffect(() => {
@@ -157,34 +154,32 @@ const Navbar = () => {
                 id="dropdown_item_parent_container"
                 className={`dropdown_menu ${open ? "open" : ""}`}
               >
-                {userRole === "admin" ? (
-                  <NavLink to="/dashboard">
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <MdOutlineSpaceDashboard />
-                      Dashboard
-                    </span>
-                  </NavLink>
-                ) : (
-                  <NavLink to="/profile">
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <MdOutlineSpaceDashboard />
-                      Profile
-                    </span>
-                  </NavLink>
-                )}
+                <NavLink to="/dashboard">
+                  <span
+                    onClick={() => setOpen(!open)}
+                    className="dropdown_item"
+                  >
+                    <MdOutlineSpaceDashboard />
+                    Dashboard
+                  </span>
+                </NavLink>
+
+                <NavLink to="/profile">
+                  <span
+                    onClick={() => setOpen(!open)}
+                    className="dropdown_item"
+                  >
+                    <MdOutlineSpaceDashboard />
+                    Profile
+                  </span>
+                </NavLink>
 
                 {user ? (
                   <span onClick={handleSignOut} className="dropdown_item">
                     <PiSignIn /> Sign Out
                   </span>
                 ) : (
-                  <Link to="/sign-up">
+                  <Link to="/sign-in">
                     <span
                       onClick={() => setOpen(!open)}
                       className="dropdown_item"
