@@ -1,0 +1,44 @@
+.google_button {
+  width: 100%;
+  padding: 5px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.google_button:hover {
+  background-color: #f3f3f3;
+}
+
+.google_button ul {
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google_button ul li:nth-child(1) {
+  font-size: 2rem;
+}
+
+.google_button ul li:nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.divider {
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider p {
+  padding-top: 10px;
+}
+
+.divider span {
+  width: 100%;
+  border-bottom: 1px solid #818080;
+}
