@@ -71,6 +71,22 @@
   border-bottom: 1px solid #7a7a7a;
 }
 
+.auth_input_container select {
+  width: 100%;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #7a7a7a;
+}
+
+.auth_input_container select:focus {
+  transition: 0.3s ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #7a7a7a;
+}
+
 .sign_up_button {
   width: 100%;
   margin-top: 20px;
@@ -80,7 +96,7 @@
   text-align: center;
   cursor: pointer;
   border-radius: 4px;
-  background-color: #151515;
+  background-color: #0060af;
   margin-bottom: 10px;
 }
 

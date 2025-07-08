@@ -40,7 +40,7 @@ nav {
 .navbar_logo {
   font-size: 2rem;
   font-weight: 600;
-  color: #309689;
+  color: #0060af;
   cursor: pointer;
 }
 
@@ -67,10 +67,10 @@ nav {
 
 .route_active_style {
   transition: 0.3s ease-in-out;
-  color: #309689;
+  color: #0060af;
   text-decoration: none;
   display: inline-block;
-  border-bottom: 3px solid #309689;
+  border-bottom: 3px solid #0060af;
 }
 
 /* Dropdown style__ */
@@ -81,7 +81,7 @@ nav {
 }
 
 .dropdown_button {
-  color: #309689;
+  color: #0060af;
   font-size: 2.5rem;
   border: none;
   cursor: pointer;
@@ -128,6 +128,7 @@ nav {
   font-weight: 500;
   transition: background 0.2s;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .dropdown_item:hover {

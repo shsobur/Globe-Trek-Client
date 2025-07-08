@@ -102,7 +102,7 @@ const Navbar = () => {
           className="main_navbar_container"
         >
           <div className="navbar_content_container">
-            <h1 className="navbar_logo">Job Portal</h1>
+            <h1 className="navbar_logo">GlobeTrek</h1>
 
             <ul className="navbar_routes_container">
               <NavLink
@@ -115,21 +115,21 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to="/jobs"
+                to="/community"
                 className={({ isActive }) =>
                   isActive ? "route_active_style" : "router_none_active_style"
                 }
               >
-                <li>Find Jobs</li>
+                <li>Community</li>
               </NavLink>
 
               <NavLink
-                to="/application"
+                to="/about"
                 className={({ isActive }) =>
                   isActive ? "route_active_style" : "router_none_active_style"
                 }
               >
-                <li>Application</li>
+                <li>About Us</li>
               </NavLink>
 
               <NavLink
@@ -139,6 +139,15 @@ const Navbar = () => {
                 }
               >
                 <li>Contact</li>
+              </NavLink>
+
+              <NavLink
+                to="/trips"
+                className={({ isActive }) =>
+                  isActive ? "route_active_style" : "router_none_active_style"
+                }
+              >
+                <li>Trips</li>
               </NavLink>
             </ul>
 
@@ -214,33 +223,33 @@ const Navbar = () => {
                         : "mobile_menu_non_active_style"
                     }
                   >
-                    <IoHomeOutline /> _Home
+                    <IoHomeOutline /> Home
                   </NavLink>
                 </li>
 
                 <li onClick={() => setMenuOpen(!menuOpen)}>
                   <NavLink
-                    to="/job"
+                    to="/community"
                     className={({ isActive }) =>
                       isActive
                         ? "mobile_menu_active_style"
                         : "mobile_menu_non_active_style"
                     }
                   >
-                    <AiOutlineShopping /> _Find job
+                    <AiOutlineShopping /> Community
                   </NavLink>
                 </li>
 
                 <li onClick={() => setMenuOpen(!menuOpen)}>
                   <NavLink
-                    to="/about-us"
+                    to="/about"
                     className={({ isActive }) =>
                       isActive
                         ? "mobile_menu_active_style"
                         : "mobile_menu_non_active_style"
                     }
                   >
-                    <FiMessageCircle /> _About Us
+                    <FiMessageCircle /> About Us
                   </NavLink>
                 </li>
 
@@ -254,6 +263,19 @@ const Navbar = () => {
                     }
                   >
                     <RiContactsBook2Line /> _Contact
+                  </NavLink>
+                </li>
+
+                <li onClick={() => setMenuOpen(!menuOpen)}>
+                  <NavLink
+                    to="/trips"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "mobile_menu_active_style"
+                        : "mobile_menu_non_active_style"
+                    }
+                  >
+                    <RiContactsBook2Line /> Trips
                   </NavLink>
                 </li>
               </ul>

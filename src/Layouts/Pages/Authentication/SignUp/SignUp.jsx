@@ -107,6 +107,17 @@ const SignUp = () => {
                 </div>
 
                 <div className="auth_input_container">
+                  <p>What's you role</p>
+                  <select
+                    defaultValue="What's your role"
+                  >
+                    <option disabled={true}>Pick you role</option>
+                    <option>Tourist</option>
+                    <option>Tour Guide</option>
+                  </select>
+                </div>
+
+                <div className="auth_input_container">
                   <p>Email</p>
                   <input
                     type="email"
