@@ -91,6 +91,7 @@ nav {
 
 .dropdown_button:hover {
   transform: scale(1.2);
+  background-color: transparent;
 }
 
 .dropdown_menu {
@@ -107,7 +108,7 @@ nav {
   pointer-events: none;
   transition: all 0.2s ease;
   z-index: 100;
-  min-width: 200px;
+  min-width: 300px;
   padding: 10px;
 }
 

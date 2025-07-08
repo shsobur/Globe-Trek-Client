@@ -15,7 +15,7 @@ const Banner = () => {
         <div className="main_banner_container">
           <Carousel
             showArrows={false}
-            autoPlay
+            // autoPlay
             infiniteLoop={true}
             className="main_carousel"
           >

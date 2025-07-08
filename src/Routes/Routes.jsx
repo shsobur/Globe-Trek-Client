@@ -7,6 +7,7 @@ import SignUp from "../Layouts/Pages/Authentication/SignUp/SignUp";
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
 import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
+import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         Component: HomePageLayout,
+      },
+      {
+        path: "/about",
+        Component: AboutUs,
       },
       {
         path: "/sign-in",
