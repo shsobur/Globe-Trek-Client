@@ -80,24 +80,6 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="main_news_letter_section_container">
-            <div className="news_letter_inner_container">
-              <div>
-                <h2>
-                  STAY UPTO DATE ABOUT
-                  <br /> OUR LATEST OFFERS
-                </h2>
-              </div>
-              <div className="news_letter_input_section_container">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email address"
-                />
-                <button>Subscribe</button>
-              </div>
-            </div>
-          </div>
         </div>
       </footer>
     </>
