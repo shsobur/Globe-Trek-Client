@@ -1,5 +1,6 @@
 // File path__
 import "./Navbar.css";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 // Imported package__
 import Swal from "sweetalert2";
@@ -18,7 +19,6 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 // From react__
 import { use, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
   const menuRef = useRef();

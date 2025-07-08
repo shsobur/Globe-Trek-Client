@@ -1,3 +1,4 @@
+// File path__
 import "./Banner.css";
 import image1 from "../../../../../assets/banner-image/image-1.jpg";
 import image2 from "../../../../../assets/banner-image/image-2.jpg";
@@ -5,6 +6,7 @@ import image3 from "../../../../../assets/banner-image/image-3.jpg";
 import image4 from "../../../../../assets/banner-image/image-4.jpg";
 import image5 from "../../../../../assets/banner-image/image-5.jpg";
 
+// Package(REACT-CAROUSEL)__
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 

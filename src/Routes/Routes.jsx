@@ -1,13 +1,13 @@
 // File path__
 import MainLayout from "../Layouts/MainLayout/MainLayout";
+import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
 import ErrorPage from "../Layouts/Components/ErrorPage/ErrorPage";
 import SignIn from "../Layouts/Pages/Authentication/SignIn/SignIn";
 import SignUp from "../Layouts/Pages/Authentication/SignUp/SignUp";
+import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
-import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
-import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
   {

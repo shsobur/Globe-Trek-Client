@@ -3,7 +3,7 @@ import "./Overview.css";
 const Overview = () => {
   return (
     <>
-      <section className="overview_section">
+      <section id="overview_section">
         <div className="main_overview_container">
           <h1>About Wanderlust Tours</h1>
 
