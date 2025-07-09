@@ -167,18 +167,12 @@ const Navbar = () => {
                 className={`dropdown_menu ${open ? "open" : ""}`}
               >
                 <h2 className="text-lg pl-5 font-semibold">
-                  Hi, {currentUserData?.userName} Welcome back<span className="font-light text-gray-400"> ({userRole})</span>
-                </h2>
-
-                <NavLink to="/dashboard">
-                  <span
-                    onClick={() => setOpen(!open)}
-                    className="dropdown_item"
-                  >
-                    <MdOutlineSpaceDashboard />
-                    Dashboard
+                  Hi, {currentUserData?.userName} Welcome back
+                  <span className="font-light text-gray-400">
+                    {" "}
+                    ({userRole})
                   </span>
-                </NavLink>
+                </h2>
 
                 <NavLink to="/profile">
                   <span
@@ -187,6 +181,16 @@ const Navbar = () => {
                   >
                     <MdOutlineSpaceDashboard />
                     Profile
+                  </span>
+                </NavLink>
+
+                <NavLink to="/dashboard">
+                  <span
+                    onClick={() => setOpen(!open)}
+                    className="dropdown_item"
+                  >
+                    <MdOutlineSpaceDashboard />
+                    Dashboard
                   </span>
                 </NavLink>
 

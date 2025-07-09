@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router";
 import { use, useState } from "react";
 
 const SignIn = () => {
-  const { handleloginUser, loading } = use(AuthContext);
+  const { handleLoginUser, loading } = use(AuthContext);
   const [error, serError] = useState("");
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const SignIn = () => {
     const email = data.email;
     const password = data.password;
 
-    handleloginUser(email, password)
+    handleLoginUser(email, password)
       .then(() => {
         const Toast = Swal.mixin({
           toast: true,
@@ -108,7 +108,7 @@ const SignIn = () => {
                 </div>
 
                 <button className="sign_up_button" type="submit">
-                  {loading ? "Working..." : "Sign In"}
+                  {loading ? "Working on it..." : "Sign In"}
                 </button>
                 <p>
                   I don't have account, go to{" "}

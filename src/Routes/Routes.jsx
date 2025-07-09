@@ -9,6 +9,7 @@ import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/Home
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
 import Profile from "../Layouts/Pages/Global/Profile/Profile";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/dashboard",
+    errorElement: <ErrorPage></ErrorPage>,
+    Component: DashboardLayout,
+    children: [
+      
+    ]
+  }
 ]);
 
 export default router;
