@@ -108,7 +108,7 @@ nav {
   pointer-events: none;
   transition: all 0.2s ease;
   z-index: 100;
-  min-width: 300px;
+  min-width: 420px;
   padding: 10px;
 }
 

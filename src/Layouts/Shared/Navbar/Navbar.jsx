@@ -19,6 +19,7 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 // From react__
 import { use, useEffect, useRef, useState } from "react";
+import useUserData from "../../Hooks/useUserData";
 
 const Navbar = () => {
   const menuRef = useRef();
@@ -26,6 +27,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { currentUserData } = useUserData();
+  const userRole = currentUserData?.userRole;
 
   // Handle Close Dropdown__
   useEffect(() => {
@@ -163,6 +166,10 @@ const Navbar = () => {
                 id="dropdown_item_parent_container"
                 className={`dropdown_menu ${open ? "open" : ""}`}
               >
+                <h2 className="text-lg pl-5 font-semibold">
+                  Hi, {currentUserData?.userName} Welcome back<span className="font-light text-gray-400"> ({userRole})</span>
+                </h2>
+
                 <NavLink to="/dashboard">
                   <span
                     onClick={() => setOpen(!open)}

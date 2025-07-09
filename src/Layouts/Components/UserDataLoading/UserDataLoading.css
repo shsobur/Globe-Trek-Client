@@ -1,0 +1,22 @@
+.main_user_data_loading_container {
+  position: relative;
+  cursor: pointer;
+}
+
+.user_data_loading_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100vh - 60px);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  color: #ffffff;
+  font-size: 1.5rem;
+  backdrop-filter: blur(10px);
+  background-color: #0000007a;
+}
