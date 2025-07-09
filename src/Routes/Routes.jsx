@@ -10,6 +10,7 @@ import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/Home
 import { createBrowserRouter } from "react-router";
 import Profile from "../Layouts/Pages/Global/Profile/Profile";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>
+        element: <Profile></Profile>,
       },
       {
         path: "/sign-in",
@@ -44,9 +45,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     Component: DashboardLayout,
     children: [
-      
-    ]
-  }
+      {
+        path: "/dashboard/admin-add-package",
+        element: <AddPackage></AddPackage>,
+      },
+    ],
+  },
 ]);
 
 export default router;

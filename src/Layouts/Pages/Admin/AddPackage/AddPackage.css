@@ -1,0 +1,108 @@
+.form_wrapper {
+  max-width: 1280px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.form_title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #2a75b3;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form_label {
+  font-weight: 500;
+  color: #374151;
+}
+
+.form_input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form_input:focus {
+  border-color: #2a75b3;
+  box-shadow: 0 0 0 2px rgba(42, 117, 179, 0.2);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form_button {
+  background-color: #2a75b3;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.form_button:hover {
+  background-color: #215d8e;
+}
+
+.submit_row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Image Preview Styles */
+.image_preview_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.image_preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #d1d5db;
+}
+
+/* Stacked input spacing inside plan/guide */
+.form_input + .form_input {
+  margin-top: 10px;
+}
+
+/* Mobile-friendly styles */
+@media (max-width: 600px) {
+  .form_wrapper {
+    padding: 24px;
+  }
+
+  .form_title {
+    font-size: 22px;
+  }
+
+  .form_button {
+    width: 100%;
+    text-align: center;
+  }
+}

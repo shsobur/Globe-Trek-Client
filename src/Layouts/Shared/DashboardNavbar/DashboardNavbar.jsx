@@ -179,14 +179,14 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/my-assigned-tours-admin"
+              to="/dashboard/admin-add-package"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcAddDatabase size={30} /> My Assigned Tours
+              <FcAddDatabase size={30} /> Add Package
             </NavLink>
 
             <NavLink
@@ -201,14 +201,25 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/manage-stories-admin"
+              to="/dashboard/manage-user-admin"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcList size={25} /> Manage Stories
+              <FcList size={25} /> Manage user
+            </NavLink>
+
+            <NavLink
+              to="/dashboard/manage-candidates-admin"
+              className={({ isActive }) =>
+                isActive
+                  ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
+                  : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
+              }
+            >
+              <FcList size={25} /> Manage Candidates
             </NavLink>
 
             <p className="w-full border border-[#2a75b3]"></p>
