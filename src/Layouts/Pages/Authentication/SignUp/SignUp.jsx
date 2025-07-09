@@ -10,9 +10,11 @@ import { Link, useNavigate } from "react-router";
 
 // Form react__
 import { use } from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const { handleUserProfile, handleCreateUser, loading } = use(AuthContext);
   const {
     watch,
@@ -26,26 +28,42 @@ const SignUp = () => {
     const photo = data.photo;
     const email = data.email;
     const password = data.password;
+    const role = data.role;
+
+    const userData = {
+      userName: name,
+      userPhoto: photo,
+      userEmail: email,
+      userRole: role,
+    };
 
     handleCreateUser(email, password)
       .then(() => {
         handleUserProfile(name, photo)
           .then(() => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top",
-              showConfirmButton: false,
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              },
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Signed up successfully",
-            });
+            axiosPublic
+              .post("/user-data", userData)
+              .then(() => {
+                console.log("data send successfully");
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  },
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Signed up successfully",
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           })
           .catch((error) => {
             console.log(error);
@@ -54,7 +72,13 @@ const SignUp = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        if(error.message === "Firebase: Error (auth/email-already-in-use).") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "This email already in use. Please use another valid email.",
+          });
+        }        
       });
   };
 
@@ -107,14 +131,27 @@ const SignUp = () => {
                 </div>
 
                 <div className="auth_input_container">
-                  <p>What's you role</p>
+                  <p>What's your role?</p>
                   <select
-                    defaultValue="What's your role"
+                    name="role"
+                    defaultValue=""
+                    {...register("role", { required: true })}
                   >
-                    <option disabled={true}>Pick you role</option>
-                    <option>Tourist</option>
-                    <option>Tour Guide</option>
+                    <option value="" disabled>
+                      Pick your role
+                    </option>
+                    <option value="Tourist">Tourist</option>
+                    <option value="Tour Guide">Tour Guide</option>
                   </select>
+                </div>
+
+                {/* handling role field error */}
+                <div>
+                  {errors.role && (
+                    <span className="text-sm text-red-400">
+                      Role field is required
+                    </span>
+                  )}
                 </div>
 
                 <div className="auth_input_container">
@@ -144,7 +181,7 @@ const SignUp = () => {
                     placeholder="Enter Password"
                     {...register("password", {
                       required: true,
-                      minLength: 6,
+                      minLength: 8,
                       pattern: /^(?=.*[a-z])(?=.*[A-Z]).*$/,
                     })}
                   />
@@ -161,7 +198,7 @@ const SignUp = () => {
                   <div>
                     {errors.password?.type === "minLength" && (
                       <span className="text-sm text-red-400">
-                        Password should be at least 8 characters
+                        Password should be at least 6 characters
                       </span>
                     )}
                   </div>
@@ -219,7 +256,7 @@ const SignUp = () => {
                 </div>
 
                 <button className="sign_up_button" type="submit">
-                  {loading ? "Working..." : "Sign Up"}
+                  {loading ? "Working on it..." : "Sign Up"}
                 </button>
                 <p>
                   I already have account go to{" "}
