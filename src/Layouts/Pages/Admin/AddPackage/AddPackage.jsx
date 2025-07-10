@@ -1,10 +1,11 @@
-import { useState } from "react";
 import "./AddPackage.css";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useState } from "react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddPackage = () => {
   const axiosSecure = useAxiosSecure();
+  const [packageLoading, setPackageLoading] = useState(false);
   const [formData, setFormData] = useState({
     tourType: "",
     title: "",
@@ -82,8 +83,10 @@ const AddPackage = () => {
     console.log("Final Tour Package:", finalData);
 
     try {
+      setPackageLoading(true);
       const res = await axiosSecure.post("/add-tour-package", finalData);
       if (res.data.insertedId) {
+        setPackageLoading(false);
         Swal.fire({
           title: "Package Added Successfully",
           icon: "success",
@@ -187,8 +190,19 @@ const AddPackage = () => {
       </div>
 
       <div className="form_row submit_row">
-        <button type="submit" className="form_button" disabled={uploading}>
-          Submit Package
+        <button
+          type="submit"
+          className="form_button"
+          disabled={uploading || packageLoading}
+        >
+          {packageLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              <p className="font-semibold">Working...</p>
+              <div className="w-4 h-4 border-2 border-dashed rounded-full animate-spin text-white"></div>
+            </div>
+          ) : (
+            "Submit Package"
+          )}
         </button>
       </div>
     </form>

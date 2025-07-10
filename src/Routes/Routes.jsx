@@ -11,6 +11,7 @@ import { createBrowserRouter } from "react-router";
 import Profile from "../Layouts/Pages/Global/Profile/Profile";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
+import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/admin-add-package",
         element: <AddPackage></AddPackage>,
+      },
+      {
+        path: "/dashboard/admin-manage-user",
+        element: <ManageUser></ManageUser>,
       },
     ],
   },
