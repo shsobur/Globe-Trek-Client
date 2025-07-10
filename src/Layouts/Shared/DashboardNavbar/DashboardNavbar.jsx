@@ -168,7 +168,7 @@ const DashboardNavbar = () => {
         {userRole === "Admin" && (
           <nav className="flex flex-col items-start space-y-8 text-lg">
             <NavLink
-              to="/dashboard/manage-profile-admin"
+              to="/dashboard/admin-manage-profile"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"

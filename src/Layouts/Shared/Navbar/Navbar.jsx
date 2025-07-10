@@ -184,7 +184,13 @@ const Navbar = () => {
                   </span>
                 </NavLink>
 
-                <NavLink to="/dashboard">
+                <NavLink
+                  to={
+                    (userRole === "Admin" &&
+                      "/dashboard/admin-manage-profile") ||
+                    (userRole === "Tourist" && "/dashboard")
+                  }
+                >
                   <span
                     onClick={() => setOpen(!open)}
                     className="dropdown_item"

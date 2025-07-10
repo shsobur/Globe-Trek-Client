@@ -12,6 +12,7 @@ import Profile from "../Layouts/Pages/Global/Profile/Profile";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
 import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
+import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     Component: DashboardLayout,
     children: [
+      {
+        path: "/dashboard/admin-manage-profile",
+        element: <ManageProfile></ManageProfile>,
+      },
       {
         path: "/dashboard/admin-add-package",
         element: <AddPackage></AddPackage>,
