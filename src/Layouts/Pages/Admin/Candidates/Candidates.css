@@ -1,0 +1,118 @@
+/* ManageCandidates.css */
+
+.manage-candidates {
+  padding: 20px;
+  max-width: 1280px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.manage-candidates h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #2a75b3;
+}
+
+.candidates-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.candidates-table th,
+.candidates-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.candidates-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.candidates-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.candidates-table td {
+  color: #666;
+}
+
+.accept {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.accept:hover {
+  background-color: #218838;
+}
+
+.reject {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.reject:hover {
+  background-color: #c82333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .candidates-table {
+    font-size: 14px;
+  }
+
+  .candidates-table th,
+  .candidates-table td {
+    padding: 8px 10px;
+  }
+
+  .accept,
+  .reject {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .manage-candidates {
+    padding: 10px;
+  }
+
+  .candidates-table {
+    font-size: 12px;
+  }
+
+  .candidates-table th,
+  .candidates-table td {
+    padding: 6px 8px;
+  }
+
+  .accept,
+  .reject {
+    padding: 4px 8px;
+    font-size: 11px;
+    margin-right: 3px;
+  }
+}
