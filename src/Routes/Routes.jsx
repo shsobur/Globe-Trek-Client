@@ -13,6 +13,7 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
 import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
 import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
+import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/admin-manage-user",
         element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "/dashboard/admin-manage-candidates",
+        element: <Candidates></Candidates>,
       },
     ],
   },
