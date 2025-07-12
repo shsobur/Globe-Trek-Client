@@ -188,7 +188,8 @@ const Navbar = () => {
                   to={
                     (userRole === "Admin" &&
                       "/dashboard/admin-manage-profile") ||
-                    (userRole === "Tourist" && "/dashboard")
+                    (userRole === "Tour Guide" &&
+                      "/dashboard/guide-manage-profile")
                   }
                 >
                   <span

@@ -14,7 +14,6 @@ const ManageProfile = () => {
   const dialogRef = useRef(null);
   const axiosSecure = useAxiosSecure();
   const { currentUserData } = useUserData();
-  console.log(currentUserData);
   const { register, handleSubmit, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
 

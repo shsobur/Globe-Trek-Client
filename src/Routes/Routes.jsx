@@ -14,6 +14,7 @@ import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
 import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
 import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
 import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
+import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     Component: DashboardLayout,
     children: [
+      // Admin Routes__
       {
         path: "/dashboard/admin-manage-profile",
         element: <ManageProfile></ManageProfile>,
@@ -63,6 +65,11 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/admin-manage-candidates",
         element: <Candidates></Candidates>,
+      },
+      // Tour Guide Routes__
+      {
+        path: "/dashboard/guide-manage-profile",
+        element: <GuideManageProfile></GuideManageProfile>
       },
     ],
   },
