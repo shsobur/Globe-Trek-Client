@@ -2,9 +2,12 @@ import "./GuideManageProfile.css";
 import React, { useRef, useState } from "react";
 import useUserData from "../../../Hooks/useUserData";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const GuideManageProfile = () => {
   const dialogRef = useRef(null);
+  const axiosSecure = useAxiosSecure();
   const { currentUserData } = useUserData();
   const { register, handleSubmit, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,7 +16,6 @@ const GuideManageProfile = () => {
     setIsSubmitting(true);
     try {
       const finalData = {
-        // Fixed: Removed unnecessary conditionals
         userName: data.userName,
         userPhoto: data.userPhoto,
         userBio: data.userBio,
@@ -27,9 +29,28 @@ const GuideManageProfile = () => {
 
       console.log(finalData);
 
-      // Close modal after submission
-      reset();
-      // dialogRef.current.close();
+      axiosSecure
+        .patch(`/update-user-profile/${currentUserData.userEmail}`, finalData)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Profile updated successfully",
+              icon: "success",
+              draggable: true,
+            });
+
+            dialogRef.current.close();
+            window.location.reload();
+          }
+        })
+        .catch((error) => {
+          console.error("Update failed:", error);
+          Swal.fire({
+            title: "Something went wrong!",
+            text: "Please try again later.",
+            icon: "error",
+          });
+        });
     } catch (error) {
       console.error("Error updating profile:", error);
     } finally {
@@ -111,7 +132,6 @@ const GuideManageProfile = () => {
                 id="imageInput"
                 type="text"
                 {...register("userPhoto")}
-                defaultValue={currentUserData?.userPhoto}
                 className="w-full input input-bordered"
                 placeholder="https://example.com/image.jpg"
               />
@@ -187,7 +207,6 @@ const GuideManageProfile = () => {
               >
                 NID Number
               </label>
-              {/* Fixed: Changed type from number to text */}
               <input
                 id="nidInput"
                 type="text"
@@ -341,7 +360,6 @@ const GuideManageProfile = () => {
             <div className="info-item">
               <label className="info-label">Languages</label>
               <div className="languages-container">
-                {/* Fixed: Treat languages as string instead of array */}
                 {currentUserData?.languages ? (
                   <span className="language-tag">
                     {currentUserData.languages}
