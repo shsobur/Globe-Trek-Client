@@ -123,7 +123,7 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/add-stories-guide"
+              to="/dashboard/guide-add-stories"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"

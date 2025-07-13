@@ -15,6 +15,7 @@ import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
 import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
 import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
 import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
+import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +70,11 @@ const router = createBrowserRouter([
       // Tour Guide Routes__
       {
         path: "/dashboard/guide-manage-profile",
-        element: <GuideManageProfile></GuideManageProfile>
+        element: <GuideManageProfile></GuideManageProfile>,
+      },
+      {
+        path: "/dashboard/guide-add-stories",
+        element: <GuideAddStories></GuideAddStories>,
       },
     ],
   },
