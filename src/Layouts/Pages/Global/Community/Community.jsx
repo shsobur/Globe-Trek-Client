@@ -34,40 +34,56 @@ const Community = () => {
         <div className="main_community_container">
           <h1 className="community_title">Explore Our Community</h1>
 
-          <div className="main_stories_card_container">
-            {stories.map((story, index) => (
-              <div key={story._id} className="stories_card">
-                <h1>{story.title}</h1>
-
-                <article>
-                  {activeIndex === index && isExpand
-                    ? story.content
-                    : story.content.slice(0, 120) + "..."}
-                </article>
-
-                {story.content.length > 120 && (
-                  <button
-                    onClick={() => handleReadMore(index)}
-                    className="text-blue-500 underline mt-2"
-                  >
-                    {activeIndex === index && isExpand
-                      ? "Read Less"
-                      : "Read More"}
-                  </button>
-                )}
-
-                <div className="stories_card_image_container">
-                  <img src={story.images[1]} alt="Card Image" />
-                </div>
-
-                <div className="stories_like_container">
-                  <span onClick={handleLikeCount}>
-                    {likeCount ? "💖" : " 🤍"}
-                  </span>
-                </div>
+          {storiesLoading ? (
+            <>
+              {" "}
+              <div className="h-[80vh] w-full m-auto flex gap-2 items-center justify-center">
+                <span className="text-4xl text-[#0060af] font-semibold">
+                  Loading stories...
+                </span>
+                <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-[#0060af]"></div>{" "}
               </div>
-            ))}
-          </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <div className="main_stories_card_container">
+                {" "}
+                {stories.map((story, index) => (
+                  <div key={story._id} className="stories_card">
+                    <h1>{story.title}</h1>
+
+                    <article>
+                      {activeIndex === index && isExpand
+                        ? story.content
+                        : story.content.slice(0, 120) + "..."}
+                    </article>
+
+                    {story.content.length > 120 && (
+                      <button
+                        onClick={() => handleReadMore(index)}
+                        className="text-blue-500 underline mt-2"
+                      >
+                        {activeIndex === index && isExpand
+                          ? "Read Less"
+                          : "Read More"}
+                      </button>
+                    )}
+
+                    <div className="stories_card_image_container">
+                      <img src={story.images[1]} alt="Card Image" />
+                    </div>
+
+                    <div className="stories_like_container">
+                      <span onClick={handleLikeCount}>
+                        {likeCount ? "💖" : " 🤍"}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>{" "}
+            </>
+          )}
         </div>
       </section>
     </>
