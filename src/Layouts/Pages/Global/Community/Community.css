@@ -1,0 +1,66 @@
+#community_section {
+  background-color: #ffffff;
+}
+
+.main_community_container {
+  max-width: 1920px;
+  margin: auto;
+  padding: 50px 10px;
+}
+
+.community_title {
+  text-align: center;
+  font-size: 3rem;
+  color: #0060af;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.main_stories_card_container {
+  margin: auto;
+  margin-top: 50px;
+  max-width: 1280px;
+  /* ------ */
+  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Stories card__ */
+
+.stories_card {
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: #0000001f 0px 1px 3px, #0000003d 0px 1px 2px;
+}
+
+.stories_card h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.stories_card article {
+  margin: 10px 0;
+}
+
+.stories_card_image_container {
+  width: 100%;
+  height: 350px;
+}
+
+.stories_card_image_container img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.stories_like_container {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  transition: 0.3s ease-in-out;
+}
+
+.stories_like_container span:hover {
+  transform: scale(1.1);
+}
