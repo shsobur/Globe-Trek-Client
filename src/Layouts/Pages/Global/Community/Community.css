@@ -64,3 +64,17 @@
 .stories_like_container span:hover {
   transform: scale(1.1);
 }
+
+/* Image modal style__ */
+
+.modal-box {
+  max-width: 1024px;
+  margin: auto;
+  padding: 50px;
+}
+
+.stories_image_all_container img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}

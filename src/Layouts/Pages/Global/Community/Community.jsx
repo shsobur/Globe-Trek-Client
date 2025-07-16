@@ -1,7 +1,11 @@
-import { useState } from "react";
+// File path__
 import "./Community.css";
-import { useEffect } from "react";
+
+// Package(AXIOS)__
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+
+// From react__
+import { useEffect, useState } from "react";
 
 const Community = () => {
   const axiosPublic = useAxiosPublic();
@@ -71,7 +75,15 @@ const Community = () => {
                     )}
 
                     <div className="stories_card_image_container">
-                      <img src={story.images[1]} alt="Card Image" />
+                      <img
+                        onClick={() =>
+                          document
+                            .getElementById(`stories_image_modal${story._id}`)
+                            .showModal()
+                        }
+                        src={story.images[0]}
+                        alt="Card Image"
+                      />
                     </div>
 
                     <div className="stories_like_container">
@@ -79,6 +91,29 @@ const Community = () => {
                         {likeCount ? "💖" : " 🤍"}
                       </span>
                     </div>
+
+                    {/* Modal ST */}
+                    <div className="image_modal_parent_container">
+                      <dialog
+                        id={`stories_image_modal${story._id}`}
+                        className="modal"
+                      >
+                        <div className="modal-box">
+                          <form method="dialog">
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                              ✕
+                            </button>
+                          </form>
+
+                          <div className="stories_image_all_container">
+                            {story.images.map((img) => (
+                              <img key={img} src={img} alt="Image" />
+                            ))}
+                          </div>
+                        </div>
+                      </dialog>
+                    </div>
+                    {/* Modal END */}
                   </div>
                 ))}
               </div>{" "}
