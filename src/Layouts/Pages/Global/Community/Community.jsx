@@ -5,14 +5,22 @@ import "./Community.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 // From react__
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import useUserData from "../../../Hooks/useUserData";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Community = () => {
+  const { user } = useContext(AuthContext);
+  const { currentUserData } = useUserData();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const [stories, setStories] = useState([]);
-  const [likeCount, setLikeCount] = useState(false);
   const [isExpand, setIsExpand] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  // const [activeLikeIndex, setActiveLikeIndex] = useState(null);
+  // const [isClickLike, setIsClickLike] = useState(false);
   const [storiesLoading, setStoriesLoading] = useState(false);
 
   useEffect(() => {
@@ -23,13 +31,38 @@ const Community = () => {
     });
   }, [axiosPublic]);
 
-  const handleLikeCount = () => {
-    setLikeCount(!likeCount);
-  };
-
   const handleReadMore = (idx) => {
     setActiveIndex(idx);
     setIsExpand(!isExpand);
+  };
+
+  const handleLikeCount = async (value, idx, id) => {
+    if (!user) {
+      navigate("sign-in");
+
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: "You have to login first",
+      });
+    }
+
+    const newValue = value + 1;
+
+    const likeCountData = {
+      like: newValue,
+      likedBy: currentUserData.userEmail,
+    };
+
+    await axiosPublic
+      .patch(`/update-stories/${id}`, likeCountData)
+      .then((res) => {
+        if (res.data.result.modifiedCount) {
+          axiosPublic.get("/all-stories").then((res) => {
+            setStories(res.data);
+          });
+        }
+      });
   };
 
   return (
@@ -87,8 +120,21 @@ const Community = () => {
                     </div>
 
                     <div className="stories_like_container">
-                      <span onClick={handleLikeCount}>
-                        {likeCount ? "💖" : " 🤍"}
+                      <span
+                        onClick={() =>
+                          handleLikeCount(story.like, index, story._id)
+                        }
+                      >
+                        <button
+                          disabled={story.likedBy?.includes(
+                            currentUserData?.userEmail
+                          )}
+                        >
+                          {story.like === undefined ? 43 : story?.like}
+                          {story.likedBy?.includes(currentUserData?.userEmail)
+                            ? "💖"
+                            : "🤍"}
+                        </button>
                       </span>
                     </div>
 
