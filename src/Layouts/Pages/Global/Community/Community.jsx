@@ -19,8 +19,6 @@ const Community = () => {
   const [stories, setStories] = useState([]);
   const [isExpand, setIsExpand] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
-  // const [activeLikeIndex, setActiveLikeIndex] = useState(null);
-  // const [isClickLike, setIsClickLike] = useState(false);
   const [storiesLoading, setStoriesLoading] = useState(false);
 
   useEffect(() => {

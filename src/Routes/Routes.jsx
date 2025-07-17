@@ -17,6 +17,7 @@ import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
 import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
 import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
 import Community from "../Layouts/Pages/Global/Community/Community";
+import Trips from "../Layouts/Pages/Global/Trips/Trips";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         Component: AboutUs,
+      },
+      {
+        path: "/trips",
+        Component: Trips,
       },
       {
         path: "/profile",
