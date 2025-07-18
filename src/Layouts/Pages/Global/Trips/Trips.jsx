@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import "./Trips.css";
+import { Link } from "react-router";
 
 const Trips = () => {
   const axiosPublic = useAxiosPublic();
@@ -56,7 +57,7 @@ const Trips = () => {
                         alt="Tropical Paradise"
                       />
                       <div className="card-overlay">
-                        <span className="price-badge">{item.price}</span>
+                        <span className="price-badge">৳{item.price}</span>
                       </div>
                     </div>
 
@@ -66,20 +67,19 @@ const Trips = () => {
 
                       <div className="card-footer">
                         <div className="trip-details">
-                          <span className="duration">
-                            <i className="icon">🕐</i>
-                            {item.createdAt}
-                          </span>
                           <span className="location">
                             <i className="icon">📍</i>
                             {item.location}
                           </span>
                         </div>
 
-                        <button className="details-button">
-                          View Details
-                          <span className="button-arrow">→</span>
-                        </button>
+                        <Link to={`/package-details/${item._id}`}>
+                          <button className="details-button">
+                            View Details
+                            <span className="button-arrow">→</span>
+                          </button>
+                        </Link>
+                        
                       </div>
                     </div>
                   </div>
