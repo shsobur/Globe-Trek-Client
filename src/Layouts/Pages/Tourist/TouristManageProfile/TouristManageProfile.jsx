@@ -1,11 +1,11 @@
-import "./GuideManageProfile.css";
-import React, { useRef, useState } from "react";
+import "./TouristManageProfile.css";
 import useUserData from "../../../Hooks/useUserData";
-import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const GuideManageProfile = () => {
+const TouristManageProfile = () => {
   const dialogRef = useRef(null);
   const axiosSecure = useAxiosSecure();
   const { currentUserData } = useUserData();
@@ -394,4 +394,4 @@ const GuideManageProfile = () => {
   );
 };
 
-export default GuideManageProfile;
+export default TouristManageProfile;

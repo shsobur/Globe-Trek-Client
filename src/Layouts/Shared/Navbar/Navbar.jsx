@@ -166,40 +166,48 @@ const Navbar = () => {
                 id="dropdown_item_parent_container"
                 className={`dropdown_menu ${open ? "open" : ""}`}
               >
-                <h2 className="text-lg pl-5 font-semibold">
-                  Hi, {currentUserData?.userName} Welcome back
-                  <span className="font-light text-gray-400">
-                    {" "}
-                    ({userRole})
-                  </span>
-                </h2>
+                {user && (
+                  <h2 className="text-lg pl-5 font-semibold">
+                    Hi, {currentUserData?.userName} Welcome back
+                    <span className="font-light text-gray-400">
+                      {" "}
+                      ({userRole})
+                    </span>
+                  </h2>
+                )}
 
-                <NavLink to="/profile">
-                  <span
-                    onClick={() => setOpen(!open)}
-                    className="dropdown_item"
-                  >
-                    <MdOutlineSpaceDashboard />
-                    Profile
-                  </span>
-                </NavLink>
+                {user && (
+                  <NavLink to="/profile">
+                    <span
+                      onClick={() => setOpen(!open)}
+                      className="dropdown_item"
+                    >
+                      <MdOutlineSpaceDashboard />
+                      Profile
+                    </span>
+                  </NavLink>
+                )}
 
-                <NavLink
-                  to={
-                    (userRole === "Admin" &&
-                      "/dashboard/admin-manage-profile") ||
-                    (userRole === "Tour Guide" &&
-                      "/dashboard/guide-manage-profile")
-                  }
-                >
-                  <span
-                    onClick={() => setOpen(!open)}
-                    className="dropdown_item"
+                {user && (
+                  <NavLink
+                    to={
+                      (userRole === "Admin" &&
+                        "/dashboard/admin-manage-profile") ||
+                      (userRole === "Tour Guide" &&
+                        "/dashboard/guide-manage-profile") ||
+                      (userRole === "Tourist" &&
+                        "/dashboard/tourist-manage-profile")
+                    }
                   >
-                    <MdOutlineSpaceDashboard />
-                    Dashboard
-                  </span>
-                </NavLink>
+                    <span
+                      onClick={() => setOpen(!open)}
+                      className="dropdown_item"
+                    >
+                      <MdOutlineSpaceDashboard />
+                      Dashboard
+                    </span>
+                  </NavLink>
+                )}
 
                 {user ? (
                   <span onClick={handleSignOut} className="dropdown_item">

@@ -44,7 +44,6 @@ const SignUp = () => {
             axiosPublic
               .post("/user-data", userData)
               .then(() => {
-                console.log("data send successfully");
                 const Toast = Swal.mixin({
                   toast: true,
                   position: "top",

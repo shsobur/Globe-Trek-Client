@@ -19,6 +19,7 @@ import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStor
 import Community from "../Layouts/Pages/Global/Community/Community";
 import Trips from "../Layouts/Pages/Global/Trips/Trips";
 import packageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
+import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,8 @@ const router = createBrowserRouter([
       {
         path: "/package-details/:id",
         Component: packageDetails,
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/get-package-details/${params.id}`),
       },
       {
         path: "/profile",
@@ -90,6 +93,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/guide-add-stories",
         element: <GuideAddStories></GuideAddStories>,
+      },
+
+      // Tourist Routes__
+      {
+        path: "/dashboard/tourist-manage-profile",
+        element: <TouristManageProfile></TouristManageProfile>,
       },
     ],
   },

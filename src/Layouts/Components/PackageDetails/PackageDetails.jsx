@@ -1,38 +1,5 @@
-import React from "react";
 import "./PackageDetails.css";
-
-// Tour package data
-const tourData = {
-  tourType: "Hill Adventure",
-  title: "Sajek Valley – Cloud Touching Adventure",
-  price: 5500,
-  location: "Sajek Valley, Rangamati",
-  duration: "3 Days 2 Nights",
-  images: [
-    "https://i.ibb.co/FLJS8BFQ/Ssjek-1.jpg",
-    "https://i.ibb.co/YF7HG7Mk/Ssjek-2.jpg",
-    "https://i.ibb.co/7Nkcty23/Ssjek-3.jpg",
-    "https://i.ibb.co/Hp2xtjMG/Ssjek-4.jpg",
-    "https://i.ibb.co/Jw6dnH4g/Ssjek-5.jpg",
-  ],
-  overview:
-    "Experience the land of clouds – Sajek Valley. This package offers you a scenic adventure through the green hills of Rangamati, tribal hospitality, and peaceful nature. Ideal for couples, friends, or solo travelers looking for a quiet break.",
-  tourPlan: [
-    {
-      day: "Day 1",
-      plan: "Breakfast at Khagrachari, transfer to Sajek by Chander Gari (local jeep), check-in at resort, sunset view from Helipad.",
-    },
-    {
-      day: "Day 2",
-      plan: "Breakfast at Khagrachari, transfer to Sajek by Chander Gari (local jeep), check-in at resort, sunset view from Helipad.",
-    },
-    {
-      day: "Day 3",
-      plan: "Visit Konglak hill, tribal village tour, local lunch, return trip to Khagrachari, evening bus back to Dhaka.",
-    },
-  ],
-  createdAt: "2025-07-09T16:38:11.388Z",
-};
+import { useLoaderData } from "react-router";
 
 // Sample tour guide data
 const tourGuides = [
@@ -63,6 +30,8 @@ const tourGuides = [
 ];
 
 const PackageDetails = () => {
+  const tourData = useLoaderData();
+
   return (
     <section id="tour_package_details_section">
       <div className="tour-package-details">
@@ -153,6 +122,7 @@ const PackageDetails = () => {
                 </span>
               </button>
             </div>
+
           </div>
         </div>
       </div>
