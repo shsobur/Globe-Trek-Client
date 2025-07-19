@@ -1,5 +1,16 @@
+// File path__
 import "./PackageDetails.css";
-import { useLoaderData } from "react-router";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import useUserData from "../../Hooks/useUserData";
+
+// Package(REACT-ROUTER, REACT-DATEPICKER, SWEETALERT2)__
+import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useLoaderData, useNavigate } from "react-router";
+
+// From react__
+import { useContext, useState } from "react";
 
 // Sample tour guide data
 const tourGuides = [
@@ -30,10 +41,140 @@ const tourGuides = [
 ];
 
 const PackageDetails = () => {
+  const { user } = useContext(AuthContext);
+  const { currentUserData } = useUserData();
   const tourData = useLoaderData();
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date());
+  const [selectedGuide, setSelectedGuide] = useState("");
+
+  const guideList = [
+    { _id: "1", name: "John Doe" },
+    { _id: "2", name: "Sadia Parveen" },
+  ];
+
+  const handlePackageBooking = () => {
+    if (!user) {
+      Swal.fire({
+        title: "Sign in for free",
+        text: "You have to sign in first to book tour package",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go to sign in",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+
+      return;
+    }
+
+    console.log("user loged in");
+  };
 
   return (
     <section id="tour_package_details_section">
+      {/* Booking modal_ST */}
+
+      <dialog id="booking_modal" className="modal">
+        <div className="modal-box max-w-xl">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+
+          <h3 className="text-xl font-semibold text-[#2a75b3] mb-4 text-center">
+            Book Your Tour
+          </h3>
+
+          <form className="space-y-4">
+            {/* Tourist Name */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Tourist Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
+              />
+            </div>
+
+            {/* Tourist Email */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Tourist Email
+              </label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
+              />
+            </div>
+
+            {/* Price */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Price
+              </label>
+              <input
+                type="number"
+                placeholder="Enter tour price"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
+              />
+            </div>
+
+            {/* Tour Date */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Tour Date
+              </label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
+              />
+            </div>
+
+            {/* Tour Guide Name */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Tour Guide Name
+              </label>
+              <select
+                value={selectedGuide}
+                onChange={(e) => setSelectedGuide(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
+              >
+                <option value="">Select a guide</option>
+                {guideList.map((guide) => (
+                  <option key={guide._id} value={guide.name}>
+                    {guide.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Book Now Button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                onClick={handlePackageBooking}
+                className="w-full bg-[#2a75b3] text-white font-semibold py-2 rounded-lg hover:bg-[#24659e] transition duration-200"
+              >
+                Book Now
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
+      {/* Booking modal_END */}
+
       <div className="tour-package-details">
         <div className="inner_container">
           {/* Hero Section */}
@@ -114,15 +255,22 @@ const PackageDetails = () => {
             </div>
 
             {/* Book Button */}
-            <div className="book-section">
-              <button className="book-btn">
-                <span className="book-text">Book This Package</span>
-                <span className="book-price">
-                  ৳{tourData.price.toLocaleString()}
-                </span>
-              </button>
-            </div>
 
+            {currentUserData?.userRole === "Tourist" && (
+              <div className="book-section">
+                <button
+                  onClick={() =>
+                    document.getElementById("booking_modal").showModal()
+                  }
+                  className="book-btn"
+                >
+                  <span className="book-text">Book This Package</span>
+                  <span className="book-price">
+                    ৳{tourData.price.toLocaleString()}
+                  </span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
