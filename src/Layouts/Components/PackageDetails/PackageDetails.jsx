@@ -1,7 +1,8 @@
 // File path__
 import "./PackageDetails.css";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import useUserData from "../../Hooks/useUserData";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 // Package(REACT-ROUTER, REACT-DATEPICKER, SWEETALERT2)__
 import Swal from "sweetalert2";
@@ -10,48 +11,30 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useLoaderData, useNavigate } from "react-router";
 
 // From react__
-import { useContext, useState } from "react";
-
-// Sample tour guide data
-const tourGuides = [
-  {
-    id: 1,
-    name: "Ahmed Hassan",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    rating: 4.9,
-    experience: "5 years",
-  },
-  {
-    id: 2,
-    name: "Fatima Rahman",
-    image:
-      "https://images.unsplash.com/photo-1494790108755-2616c23e76b3?w=150&h=150&fit=crop&crop=face",
-    rating: 4.8,
-    experience: "4 years",
-  },
-  {
-    id: 3,
-    name: "Karim Abdullah",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-    rating: 4.7,
-    experience: "6 years",
-  },
-];
+import { useContext, useEffect, useState } from "react";
 
 const PackageDetails = () => {
-  const { user } = useContext(AuthContext);
-  const { currentUserData } = useUserData();
   const tourData = useLoaderData();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
+  const { currentUserData } = useUserData();
+  const [tourGuides, setTourGuides] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selectedGuide, setSelectedGuide] = useState("");
 
-  const guideList = [
-    { _id: "1", name: "John Doe" },
-    { _id: "2", name: "Sadia Parveen" },
-  ];
+  useEffect(() => {
+    axiosPublic.get("/get-all-tourGuides").then((res) => {
+      setTourGuides(res.data);
+    });
+  }, [axiosPublic]);
+
+  const guideList = tourGuides.map((guide) => ({
+    _id: guide._id,
+    name: guide.userName,
+  }));
+
+  console.log(guideList);
 
   const handlePackageBooking = () => {
     if (!user) {
@@ -235,16 +218,15 @@ const PackageDetails = () => {
               <h2>Meet Your Tour Guides</h2>
               <div className="guides-grid">
                 {tourGuides.map((guide) => (
-                  <div key={guide.id} className="guide-card">
+                  <div key={guide._id} className="guide-card">
                     <div className="guide-image">
-                      <img src={guide.image} alt={guide.name} />
+                      <img src={guide.userPhoto} alt={guide.userName} />
                     </div>
                     <div className="guide-info">
-                      <h3>{guide.name}</h3>
+                      <h3>{guide.userName}</h3>
                       <div className="guide-meta">
-                        <span className="rating">⭐ {guide.rating}</span>
                         <span className="experience">
-                          {guide.experience} experience
+                          {guide.userEmail} experience
                         </span>
                       </div>
                       <button className="view-profile-btn">View Profile</button>
