@@ -20,6 +20,11 @@ const PackageDetails = () => {
   const { user } = useContext(AuthContext);
   const { currentUserData } = useUserData();
   const [tourGuides, setTourGuides] = useState([]);
+  const [bookingLoading, setBookingLoading] = useState(false);
+  // Booking From Data__
+  const [touristName, setTouristName] = useState();
+  const [touristEmail, setTouristEmail] = useState();
+  const [price, setPrice] = useState();
   const [startDate, setStartDate] = useState(new Date());
   const [selectedGuide, setSelectedGuide] = useState("");
 
@@ -34,9 +39,9 @@ const PackageDetails = () => {
     name: guide.userName,
   }));
 
-  console.log(guideList);
+  const handlePackageBooking = (e) => {
+    e.preventDefault();
 
-  const handlePackageBooking = () => {
     if (!user) {
       Swal.fire({
         title: "Sign in for free",
@@ -55,7 +60,47 @@ const PackageDetails = () => {
       return;
     }
 
-    console.log("user loged in");
+    const bookingData = {
+      touristName: touristName || currentUserData?.userName,
+      touristEmail: touristEmail || currentUserData?.userEmail,
+      packagePrice: parseFloat(price) || tourData?.price,
+      tourDate: startDate,
+      tourGuide: selectedGuide,
+      packageName: tourData?.title,
+      status: "Pending",
+    };
+
+    console.log(bookingData);
+
+    setBookingLoading(true);
+    axiosPublic.post("/tour-package-booking", bookingData).then((res) => {
+      console.log(res.data);
+
+      if (res.data.insertedId) {
+        setBookingLoading(false);
+
+        Swal.fire({
+          title: "Booking Successful",
+          text: "You booking is under review, to confirm you booking completed package payment",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Payment Now",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.alert("Not now later");
+          }
+        });
+
+        setTouristName("");
+        setTouristEmail("");
+        setPrice("");
+        setStartDate(null);
+        setSelectedGuide("");
+        document.getElementById("booking_modal").close();
+      }
+    });
   };
 
   return (
@@ -74,7 +119,7 @@ const PackageDetails = () => {
             Book Your Tour
           </h3>
 
-          <form className="space-y-4">
+          <form onSubmit={handlePackageBooking} className="space-y-4">
             {/* Tourist Name */}
             <div>
               <label className="block mb-1 text-sm font-medium text-gray-700">
@@ -82,7 +127,11 @@ const PackageDetails = () => {
               </label>
               <input
                 type="text"
+                value={touristName}
+                defaultValue={currentUserData?.userName}
+                onChange={(e) => setTouristName(e.target.value)}
                 placeholder="Enter your name"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
               />
             </div>
@@ -94,7 +143,11 @@ const PackageDetails = () => {
               </label>
               <input
                 type="email"
+                value={touristEmail}
+                defaultValue={currentUserData?.userEmail}
+                onChange={(e) => setTouristEmail(e.target.value)}
                 placeholder="Enter your email"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
               />
             </div>
@@ -106,7 +159,11 @@ const PackageDetails = () => {
               </label>
               <input
                 type="number"
+                value={price}
+                defaultValue={tourData?.price}
+                onChange={(e) => setPrice(e.target.value)}
                 placeholder="Enter tour price"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
               />
             </div>
@@ -119,6 +176,8 @@ const PackageDetails = () => {
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                placeholderText="Select a date"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
               />
             </div>
@@ -131,6 +190,7 @@ const PackageDetails = () => {
               <select
                 value={selectedGuide}
                 onChange={(e) => setSelectedGuide(e.target.value)}
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2a75b3]"
               >
                 <option value="">Select a guide</option>
@@ -144,14 +204,18 @@ const PackageDetails = () => {
 
             {/* Book Now Button */}
             <div className="pt-2">
-              <button
-                type="submit"
-                onClick={handlePackageBooking}
-                className="w-full bg-[#2a75b3] text-white font-semibold py-2 rounded-lg hover:bg-[#24659e] transition duration-200"
-              >
-                Book Now
-              </button>
+              {bookingLoading ? (
+                <button>Please wait...</button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-[#2a75b3] text-white font-semibold py-2 rounded-lg hover:bg-[#24659e] transition duration-200"
+                >
+                  Book Now
+                </button>
+              )}
             </div>
+            
           </form>
         </div>
       </dialog>
