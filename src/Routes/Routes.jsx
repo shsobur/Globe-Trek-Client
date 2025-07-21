@@ -1,26 +1,27 @@
 // File path__
+import Trips from "../Layouts/Pages/Global/Trips/Trips";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
+import Profile from "../Layouts/Pages/Global/Profile/Profile";
 import ErrorPage from "../Layouts/Components/ErrorPage/ErrorPage";
 import SignIn from "../Layouts/Pages/Authentication/SignIn/SignIn";
 import SignUp from "../Layouts/Pages/Authentication/SignUp/SignUp";
+import Community from "../Layouts/Pages/Global/Community/Community";
+import MyBooking from "../Layouts/Pages/Tourist/MyBooking/MyBooking";
+import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
+import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
+import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import GuideBooking from "../Layouts/Pages/Guide/GuideBooking/GuideBooking";
+import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
+import packageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
+import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
 import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
+import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
+import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
-import Profile from "../Layouts/Pages/Global/Profile/Profile";
-import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
-import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
-import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
-import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
-import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
-import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
-import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
-import Community from "../Layouts/Pages/Global/Community/Community";
-import Trips from "../Layouts/Pages/Global/Trips/Trips";
-import packageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
-import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
-import MyBooking from "../Layouts/Pages/Tourist/MyBooking/MyBooking";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/guide-manage-profile",
         element: <GuideManageProfile></GuideManageProfile>,
+      },
+      {
+        path: "/dashboard/guide-package-booking",
+        element: <GuideBooking></GuideBooking>,
       },
       {
         path: "/dashboard/guide-add-stories",
