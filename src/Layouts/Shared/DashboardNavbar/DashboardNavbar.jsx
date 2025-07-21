@@ -35,7 +35,7 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/my-bookings-tourist"
+              to="/dashboard/tourist-manage-booking"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"

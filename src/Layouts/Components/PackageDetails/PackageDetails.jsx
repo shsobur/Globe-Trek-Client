@@ -37,6 +37,7 @@ const PackageDetails = () => {
   const guideList = tourGuides.map((guide) => ({
     _id: guide._id,
     name: guide.userName,
+    email: guide.userEmail,
   }));
 
   const handlePackageBooking = (e) => {
@@ -65,7 +66,7 @@ const PackageDetails = () => {
       touristEmail: touristEmail || currentUserData?.userEmail,
       packagePrice: parseFloat(price) || tourData?.price,
       tourDate: startDate,
-      tourGuide: selectedGuide,
+      guideEmail: selectedGuide,
       packageName: tourData?.title,
       status: "Pending",
     };
@@ -195,7 +196,7 @@ const PackageDetails = () => {
               >
                 <option value="">Select a guide</option>
                 {guideList.map((guide) => (
-                  <option key={guide._id} value={guide.name}>
+                  <option key={guide._id} value={guide.email}>
                     {guide.name}
                   </option>
                 ))}
@@ -215,7 +216,6 @@ const PackageDetails = () => {
                 </button>
               )}
             </div>
-            
           </form>
         </div>
       </dialog>

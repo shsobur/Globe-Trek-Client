@@ -20,6 +20,7 @@ import Community from "../Layouts/Pages/Global/Community/Community";
 import Trips from "../Layouts/Pages/Global/Trips/Trips";
 import packageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
 import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
+import MyBooking from "../Layouts/Pages/Tourist/MyBooking/MyBooking";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/tourist-manage-profile",
         element: <TouristManageProfile></TouristManageProfile>,
+      },
+      {
+        path: "/dashboard/tourist-manage-booking",
+        element: <MyBooking></MyBooking>,
       },
     ],
   },
