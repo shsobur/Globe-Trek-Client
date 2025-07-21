@@ -9,7 +9,6 @@ const GuideBooking = () => {
   const axiosSecure = useAxiosSecure();
   const [bookingData, setBookingData] = useState([]);
   const [booingLoading, setBooingLoading] = useState(false);
-  console.log(bookingData);
 
   useEffect(() => {
     if (!currentUserData?.userEmail) {
