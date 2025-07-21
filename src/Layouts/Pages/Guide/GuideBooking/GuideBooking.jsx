@@ -75,13 +75,14 @@ const GuideBooking = () => {
                           ? booking.packageName.slice(0, 21) + "..."
                           : booking.packageName}
                       </span>
-
                     </div>
                   </td>
 
                   <td className="tourist-name">
                     <div className="tourist-info">
-                      <span className="tourist-title">{booking.touristName}</span>
+                      <span className="tourist-title">
+                        {booking.touristName}
+                      </span>
                       <span className="tourist-email">
                         {booking.touristEmail}
                       </span>
@@ -100,13 +101,19 @@ const GuideBooking = () => {
 
                   <td className="status-actions">
                     <div className="status-section">
-                      <span className="status-badge pending">{booking.status}</span>
+                      <span className="status-badge pending">
+                        {booking.status}
+                      </span>
                     </div>
 
                     <div className="actions">
                       <button
-                      
-                        className="btn btn-accept"
+                        disabled={booking.status === "Pending"}
+                        className={
+                          booking.status === "Pending"
+                            ? "btn btn-accept-disable"
+                            : "btn btn-accept"
+                        }
                         onClick={() => handleAccept("TOUR001")}
                       >
                         Accept

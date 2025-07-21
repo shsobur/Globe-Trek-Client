@@ -93,17 +93,12 @@
 .package-title {
   font-weight: 600;
   color: #1e40af;
-  font-size: 1rem;
-}
-
-.package-subtitle {
-  font-size: 0.85rem;
-  color: #64748b;
-  font-style: italic;
+  font-size: 1.2rem;
 }
 
 /* Tourist Name Styling */
 .tourist-name {
+  font-size: 1.2rem;
   min-width: 180px;
 }
 
@@ -119,12 +114,13 @@
 }
 
 .tourist-email {
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   color: #64748b;
 }
 
 /* Tour Date Styling */
 .tour-date {
+  font-size: 1.2rem;
   min-width: 140px;
 }
 
@@ -233,6 +229,12 @@
 .btn-accept:hover {
   background: linear-gradient(135deg, #059669, #047857);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-accept-disable {
+  background: linear-gradient(135deg, #096748, #026243);
+  color: #bbbbbb;
+  border: 1px solid #059669;
 }
 
 .btn-reject {
