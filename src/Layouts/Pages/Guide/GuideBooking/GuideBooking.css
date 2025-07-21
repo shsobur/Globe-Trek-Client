@@ -57,7 +57,7 @@
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid #87ceeb;
+  border-bottom: 2px solid #0c8cbe;
 }
 
 .booking-table tbody tr {
@@ -147,8 +147,12 @@
 
 .price {
   font-weight: 600;
-  color: #059669;
-  font-size: 1rem;
+}
+
+.red-price {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #db3c34;
 }
 
 /* Status & Actions Column */
@@ -233,7 +237,7 @@
 
 .btn-accept-disable {
   background: linear-gradient(135deg, #096748, #026243);
-  color: #bbbbbb;
+  color: #c2c2c2;
   border: 1px solid #059669;
 }
 
@@ -249,13 +253,13 @@
 }
 
 /* Empty State */
-  .empty-state-parent-container {
-    width: 1536px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.empty-state-parent-container {
+  width: 1536px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .empty-state {
   width: 100%;

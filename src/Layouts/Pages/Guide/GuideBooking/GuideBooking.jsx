@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./GuideBooking.css";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const GuideBooking = () => {
   const { currentUserData } = useUserData();
@@ -28,9 +29,39 @@ const GuideBooking = () => {
     // Add accept logic here later
   };
 
-  const handleReject = (bookingId) => {
-    console.log(`Rejected booking with ID: ${bookingId}`);
-    // Add reject logic here later
+  const handleReject = (id) => {
+    const newData = { newStatus: "Rejected" };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Reject",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/reject-booking-status/${id}`, newData)
+          .then((res) => {
+            console.log(res.data);
+
+            axiosSecure
+              .get(`guide-booing/${currentUserData.userEmail}`)
+              .then((res) => {
+                setBookingData(res.data);
+                if (res.data.modifiedCount) {
+                  Swal.fire({
+                    title: "Rejected!",
+                    text: "Your booking is Rejected",
+                    icon: "success",
+                  });
+                }
+              });
+          });
+      }
+    });
   };
 
   return (
@@ -96,7 +127,13 @@ const GuideBooking = () => {
                   </td>
 
                   <td className="tour-price">
-                    <span className="price">৳{booking.packagePrice}</span>
+                    <span
+                      className={
+                        booking.status === "Rejected" ? "red-price" : "price"
+                      }
+                    >
+                      ৳{booking.packagePrice}
+                    </span>
                   </td>
 
                   <td className="status-actions">
@@ -106,26 +143,28 @@ const GuideBooking = () => {
                       </span>
                     </div>
 
-                    <div className="actions">
-                      <button
-                        disabled={booking.status === "Pending"}
-                        className={
-                          booking.status === "Pending"
-                            ? "btn btn-accept-disable"
-                            : "btn btn-accept"
-                        }
-                        onClick={() => handleAccept("TOUR001")}
-                      >
-                        Accept
-                      </button>
+                    {booking.status !== "Rejected" && (
+                      <div className="actions">
+                        <button
+                          disabled={booking.status === "Pending"}
+                          className={
+                            booking.status === "Pending"
+                              ? "btn btn-accept-disable"
+                              : "btn btn-accept"
+                          }
+                          onClick={() => handleAccept("TOUR001")}
+                        >
+                          Accept
+                        </button>
 
-                      <button
-                        className="btn btn-reject"
-                        onClick={() => handleReject("TOUR001")}
-                      >
-                        Reject
-                      </button>
-                    </div>
+                        <button
+                          className="btn btn-reject"
+                          onClick={() => handleReject(booking._id)}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))
