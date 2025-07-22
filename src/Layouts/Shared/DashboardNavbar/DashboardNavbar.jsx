@@ -46,6 +46,17 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
+              to="/dashboard/tourist-add-stories"
+              className={({ isActive }) =>
+                isActive
+                  ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
+                  : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
+              }
+            >
+              <FcList size={25} /> Add Stories
+            </NavLink>
+
+            <NavLink
               to="/dashboard/manage-stories-tourist"
               className={({ isActive }) =>
                 isActive
@@ -54,17 +65,6 @@ const DashboardNavbar = () => {
               }
             >
               <FcExternal size={30} /> Manage Stories
-            </NavLink>
-
-            <NavLink
-              to="/dashboard/add-stories-tourist"
-              className={({ isActive }) =>
-                isActive
-                  ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
-                  : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
-              }
-            >
-              <FcList size={25} /> Add Stories
             </NavLink>
 
             <NavLink

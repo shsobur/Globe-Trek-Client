@@ -1,0 +1,169 @@
+/* GuideAddStories.css */
+
+.guide-add-stories {
+  background-color: #f0f8ff;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  color: #007acc;
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #555;
+}
+
+.story-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-textarea {
+  resize: vertical;
+}
+
+.upload-area {
+  border: 2px dashed #007acc;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.drag-active {
+  background-color: #e6f7ff;
+}
+
+.upload-content h3 {
+  margin-bottom: 8px;
+  color: #007acc;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.browse-btn {
+  margin-top: 10px;
+  background-color: #007acc;
+  color: #ffffff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.image-preview {
+  margin: 20px 0;
+}
+
+.preview-title {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.image-item {
+  position: relative;
+}
+
+.preview-image {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-info {
+  text-align: center;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-secondary {
+  background-color: #f0f8ff;
+  color: #007acc;
+  border: 1px solid #007acc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}

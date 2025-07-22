@@ -23,6 +23,7 @@ import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
 import Payment from "../Layouts/Components/Payment/Payment";
+import TouristAddStories from "../Layouts/Pages/Tourist/TouristAddStories/TouristAddStories";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,8 @@ const router = createBrowserRouter([
       {
         path: "/package-payment/:id",
         Component: Payment,
-        loader: ({params}) => fetch(`http://localhost:8000/package-price/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/package-price/${params.id}`),
       },
     ],
   },
@@ -115,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/tourist-manage-booking",
         element: <MyBooking></MyBooking>,
+      },
+      {
+        path: "/dashboard/tourist-add-stories",
+        element: <TouristAddStories></TouristAddStories>,
       },
     ],
   },
