@@ -139,16 +139,24 @@ const MyBooking = () => {
 
                     {booking.status !== "Rejected" && (
                       <div className="actions">
-                        <Link to={`/package-payment/${booking._id}`}> 
-                          <button className="btn btn-accept">Payment</button>
-                        </Link>
+                        {booking.payment === "Completed" ? (
+                          <button className="btn btn-accept">
+                            Payment Completed
+                          </button>
+                        ) : (
+                          <Link to={`/package-payment/${booking._id}`}>
+                            <button className="btn btn-accept">Payment</button>
+                          </Link>
+                        )}
 
-                        <button
-                          className="btn btn-reject"
-                          onClick={() => handleCancel(booking._id)}
-                        >
-                          Cancel
-                        </button>
+                        {booking.payment !== "Completed" && (
+                          <button
+                            className="btn btn-reject"
+                            onClick={() => handleCancel(booking._id)}
+                          >
+                            Cancel
+                          </button>
+                        )}
                       </div>
                     )}
                   </td>

@@ -1,14 +1,16 @@
 import "./Payment.css";
 import { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
+import Swal from "sweetalert2";
 
 const Payment = () => {
   const packageData = useLoaderData();
   const { currentUserData } = useUserData();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -17,6 +19,7 @@ const Payment = () => {
   const [success, setSuccess] = useState("");
   const [processing, setProcessing] = useState(false);
 
+  const bookingId = packageData._id;
   const price = packageData?.packagePrice;
 
   useEffect(() => {
@@ -68,7 +71,23 @@ const Payment = () => {
       if (paymentIntent.status === "succeeded") {
         setSuccess("✅ Payment successful!");
         setError("");
-        console.log(paymentIntent);
+        const newBookingData = {
+          newStatus: "In-review",
+          payment: "Completed",
+        };
+        axiosSecure
+          .patch(`/update-booking-status/${bookingId}`, newBookingData)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              navigate("/dashboard/tourist-manage-booking");
+
+              Swal.fire({
+                title: "Payment Successful",
+                icon: "success",
+                draggable: true,
+              });
+            }
+          });
       }
     }
 
