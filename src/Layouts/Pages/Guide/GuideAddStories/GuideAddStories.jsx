@@ -16,7 +16,6 @@ const GuideAddStories = () => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [dragActive, setDragActive] = useState(false);
-  const [storiesImageLoading, setStoriesImageLoading] = useState(false);
   const [storiesUploadLoading, setStoriesUploadLoading] = useState(false);
 
   const handleImageUpload = (event) => {
@@ -47,8 +46,8 @@ const GuideAddStories = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setStoriesUploadLoading(true);
 
-    setStoriesImageLoading(true);
     const imageUploadPromises = images.map(async (image) => {
       const formData = new FormData();
       formData.append("image", image);
@@ -67,14 +66,13 @@ const GuideAddStories = () => {
         const data = await res.json();
 
         if (data.success) {
-          setStoriesImageLoading(false);
           return data.data.display_url;
         } else {
           console.error("Image upload failed:", data);
           return null;
         }
       } catch (err) {
-        setStoriesImageLoading(false);
+        setStoriesUploadLoading(false);
         console.error("Image upload error:", err);
         return null;
       }
@@ -91,10 +89,8 @@ const GuideAddStories = () => {
       ownerEmail: currentUserData.userEmail,
     };
 
-    setStoriesUploadLoading(true);
     const res = await axiosSecure.post("/upload-stories", storiesData);
     if (res.data.insertedId) {
-      setStoriesUploadLoading(false);
       Swal.fire({
         title: "Stories uploaded successfully",
         icon: "success",
@@ -106,9 +102,8 @@ const GuideAddStories = () => {
       setImages([]);
 
       window.scrollTo(0, 0);
+      setStoriesUploadLoading(false);
     }
-
-    console.log("Form submitted:", storiesData);
   };
 
   return (
@@ -220,16 +215,17 @@ const GuideAddStories = () => {
           <div className="form-actions">
             <button
               type="submit"
-              disabled={storiesImageLoading || storiesUploadLoading}
+              disabled={storiesUploadLoading}
               className="btn btn-primary"
             >
-              {storiesImageLoading
-                ? "Uploading Images..."
-                : storiesUploadLoading
-                ? "Publishing story.."
-                : "Publish Story"}
+              {storiesUploadLoading ? "Working on it..." : "Publish Story"}
             </button>
           </div>
+          {storiesUploadLoading && (
+            <span className="text-xl font-semibold text-blue-600">
+              🌐 Uploading in progress... Please wait a moment!
+            </span>
+          )}
         </form>
       </div>
     </div>
