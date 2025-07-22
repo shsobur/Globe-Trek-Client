@@ -1,7 +1,8 @@
+// File path__
 import "./SocialLogin.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
-// Imported package__
+// Package(SWEET ALERT, REACT ROUTER, REACT ICONS)__
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
