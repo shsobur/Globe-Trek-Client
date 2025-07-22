@@ -1,10 +1,13 @@
+// File path__
 import "./Payment.css";
-import { useEffect, useState } from "react";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useLoaderData, useNavigate } from "react-router";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
+// Package(STRIPE, REACT ROUTER, SWEET ALERT)__
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const Payment = () => {
   const packageData = useLoaderData();

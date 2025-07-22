@@ -1,8 +1,10 @@
+// File path__
 import "../AuthStyle/AuthStyle.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 
-// Imported package__
+// Package(SWEET ALERT, REACT HOOK FROM, REACT ICONS)__
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { TiHomeOutline } from "react-icons/ti";
@@ -10,7 +12,6 @@ import { Link, useNavigate } from "react-router";
 
 // Form react__
 import { use } from "react";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -71,13 +72,13 @@ const SignUp = () => {
         navigate("/");
       })
       .catch((error) => {
-        if(error.message === "Firebase: Error (auth/email-already-in-use).") {
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "This email already in use. Please use another valid email.",
           });
-        }        
+        }
       });
   };
 

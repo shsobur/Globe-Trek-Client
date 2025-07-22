@@ -1,6 +1,7 @@
 // File path__
 import Trips from "../Layouts/Pages/Global/Trips/Trips";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
+import Payment from "../Layouts/Components/Payment/Payment";
 import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
 import Profile from "../Layouts/Pages/Global/Profile/Profile";
 import ErrorPage from "../Layouts/Components/ErrorPage/ErrorPage";
@@ -14,16 +15,15 @@ import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import GuideBooking from "../Layouts/Pages/Guide/GuideBooking/GuideBooking";
 import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
-import packageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
+import PackageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
 import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
 import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
+import TouristAddStories from "../Layouts/Pages/Tourist/TouristAddStories/TouristAddStories";
 import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
 import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
-import Payment from "../Layouts/Components/Payment/Payment";
-import TouristAddStories from "../Layouts/Pages/Tourist/TouristAddStories/TouristAddStories";
 
 const router = createBrowserRouter([
   {
@@ -33,23 +33,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        Component: HomePageLayout,
+        element: <HomePageLayout></HomePageLayout>,
       },
       {
         path: "/community",
-        Component: Community,
+        element: <Community></Community>,
       },
       {
         path: "/about",
-        Component: AboutUs,
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "/trips",
-        Component: Trips,
+        element: <Trips></Trips>,
       },
       {
         path: "/package-details/:id",
-        Component: packageDetails,
+        element: <PackageDetails></PackageDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:8000/get-package-details/${params.id}`),
       },
@@ -59,15 +59,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/sign-in",
-        Component: SignIn,
+        element: <SignIn></SignIn>,
       },
       {
         path: "/sign-up",
-        Component: SignUp,
+        element: <SignUp></SignUp>,
       },
       {
         path: "/package-payment/:id",
-        Component: Payment,
+        element: <Payment></Payment>,
         loader: ({ params }) =>
           fetch(`http://localhost:8000/package-price/${params.id}`),
       },

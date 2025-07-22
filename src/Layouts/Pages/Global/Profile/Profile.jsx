@@ -1,5 +1,6 @@
-import useUserData from "../../../Hooks/useUserData";
+// File path__
 import "./Profile.css";
+import useUserData from "../../../Hooks/useUserData";
 
 const Profile = () => {
   const { currentUserData } = useUserData();

@@ -3,7 +3,7 @@ import "../AuthStyle/AuthStyle.css";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 
-// Imported package__
+// Package(SWEETALEART, REACT HOOK FORM, REACT ICONS)__
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { TiHomeOutline } from "react-icons/ti";

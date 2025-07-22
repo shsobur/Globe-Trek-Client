@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+// File path__
 import "./Trips.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+
+// Package(REACT ROUTER)__
 import { Link } from "react-router";
+
+// From react__
+import { useEffect, useState } from "react";
 
 const Trips = () => {
   const axiosPublic = useAxiosPublic();
@@ -79,7 +84,6 @@ const Trips = () => {
                             <span className="button-arrow">→</span>
                           </button>
                         </Link>
-                        
                       </div>
                     </div>
                   </div>

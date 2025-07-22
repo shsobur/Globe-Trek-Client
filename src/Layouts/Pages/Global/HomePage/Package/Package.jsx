@@ -1,4 +1,7 @@
+// File path__
 import "./Package.css";
+
+// From react__
 import { useState } from "react";
 
 const Package = () => {

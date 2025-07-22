@@ -1,4 +1,4 @@
-import React from "react";
+// File path__
 import "./AboutUs.css";
 
 const AboutUs = () => {
