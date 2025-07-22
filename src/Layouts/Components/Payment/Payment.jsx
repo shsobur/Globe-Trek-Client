@@ -39,7 +39,7 @@ const Payment = () => {
     const card = elements.getElement(CardElement);
     if (!card) return;
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
       billing_details: {

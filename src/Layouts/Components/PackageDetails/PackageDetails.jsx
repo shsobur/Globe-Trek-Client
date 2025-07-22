@@ -90,7 +90,7 @@ const PackageDetails = () => {
           confirmButtonText: "Payment Now",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.alert("Not now later");
+            navigate("/dashboard/tourist-manage-booking");
           }
         });
 

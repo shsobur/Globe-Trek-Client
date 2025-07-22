@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import "./GuideBooking.css";
+import { useEffect, useState } from "react";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -23,9 +23,37 @@ const GuideBooking = () => {
     });
   }, [axiosSecure, currentUserData]);
 
-  const handleAccept = (bookingId) => {
-    console.log(`Accepted booking with ID: ${bookingId}`);
-    // Add accept logic here later
+  const handleAccept = async (id) => {
+    const newData = { newStatus: "Accepted" };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to confirm the package",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Accept",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/guide-booking-status/${id}`, newData)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              axiosSecure
+                .get(`guide-booing/${currentUserData.userEmail}`)
+                .then((res) => {
+                  setBookingData(res.data);
+                  Swal.fire({
+                    title: "Accepted",
+                    text: "Your tour guide package is accepted",
+                    icon: "success",
+                  });
+                });
+            }
+          });
+      }
+    });
   };
 
   const handleReject = (id) => {
@@ -42,22 +70,22 @@ const GuideBooking = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .patch(`/reject-booking-status/${id}`, newData)
+          .patch(`/guide-booking-status/${id}`, newData)
           .then((res) => {
-            console.log(res.data);
-
-            axiosSecure
-              .get(`guide-booing/${currentUserData.userEmail}`)
-              .then((res) => {
-                setBookingData(res.data);
-                if (res.data.modifiedCount) {
-                  Swal.fire({
-                    title: "Rejected!",
-                    text: "Your booking is Rejected",
-                    icon: "success",
-                  });
-                }
-              });
+            if (res.data.modifiedCount) {
+              axiosSecure
+                .get(`guide-booing/${currentUserData.userEmail}`)
+                .then((res) => {
+                  setBookingData(res.data);
+                  if (res.data.modifiedCount) {
+                    Swal.fire({
+                      title: "Rejected!",
+                      text: "Your booking is Rejected",
+                      icon: "success",
+                    });
+                  }
+                });
+            }
           });
       }
     });
@@ -144,24 +172,34 @@ const GuideBooking = () => {
 
                     {booking.status !== "Rejected" && (
                       <div className="actions">
-                        <button
-                          disabled={booking.status === "Pending"}
-                          className={
-                            booking.status === "Pending"
-                              ? "btn btn-accept-disable"
-                              : "btn btn-accept"
-                          }
-                          onClick={() => handleAccept("TOUR001")}
-                        >
-                          Accept
-                        </button>
+                        {booking.status !== "Accepted" && (
+                          <button
+                            disabled={booking.status === "Pending"}
+                            className={
+                              booking.status === "Pending"
+                                ? "btn btn-accept-disable"
+                                : "btn btn-accept"
+                            }
+                            onClick={() => handleAccept(booking._id)}
+                          >
+                            Accept
+                          </button>
+                        )}
 
-                        <button
-                          className="btn btn-reject"
-                          onClick={() => handleReject(booking._id)}
-                        >
-                          Reject
-                        </button>
+                        {booking.status === "Accepted" && (
+                          <button className="btn btn-accept">
+                            Tour Accepted!
+                          </button>
+                        )}
+
+                        {booking.status !== "Accepted" && (
+                          <button
+                            className="btn btn-reject"
+                            onClick={() => handleReject(booking._id)}
+                          >
+                            Reject
+                          </button>
+                        )}
                       </div>
                     )}
                   </td>
