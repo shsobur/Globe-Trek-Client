@@ -1,0 +1,55 @@
+#payment_section {
+  max-width: 1280px;
+  margin: auto;
+  padding: 100px 10px;
+  /* ------ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#payment_section h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #165990;
+  margin-bottom: 50px;
+}
+
+.payment-box {
+  width: 600px;
+  padding: 50px;
+  border-radius: 12px;
+  background: #f9fcff;
+  border: 2px solid #2a75b3;
+}
+
+.payment-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.pay-btn {
+  color: white;
+  padding: 10px 16px;
+  margin-top: 20px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  background-color: #2a75b3;
+}
+
+.pay-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  color: red;
+  margin-top: 10px;
+}
+
+.success-msg {
+  color: green;
+  margin-top: 10px;
+}

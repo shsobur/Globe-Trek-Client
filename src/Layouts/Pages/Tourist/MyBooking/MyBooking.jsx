@@ -1,8 +1,14 @@
+// File path__
 import "./MyBooking.css";
-import { useEffect, useState } from "react";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import Swal from "sweetalert2";
+
+// Package(SWEETALERT)__
+import Swal from "sweetalert2";
+
+// From react__
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const MyBooking = () => {
   const { currentUserData } = useUserData();
@@ -22,11 +28,39 @@ const MyBooking = () => {
     });
   }, [axiosSecure, currentUserData]);
 
-  const handlePayment = () => {
-    // Add accept logic here later
-  };
+  // const handlePayment = (id) => {
+  //   navigate(`/package-payment/${id}`);
+  // };
 
-  const handleCancel = () => {
+  const handleCancel = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/delete-package-booking/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            axiosSecure
+              .get(`/user-booing/${currentUserData.userEmail}`)
+              .then((res) => {
+                setBookingData(res.data);
+              });
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+
     // Add accept logic here later
   };
 
@@ -105,12 +139,9 @@ const MyBooking = () => {
 
                     {booking.status !== "Rejected" && (
                       <div className="actions">
-                        <button
-                          className="btn btn-accept"
-                          onClick={() => handlePayment("TOUR001")}
-                        >
-                          Payment
-                        </button>
+                        <Link to={`/package-payment/${booking._id}`}> 
+                          <button className="btn btn-accept">Payment</button>
+                        </Link>
 
                         <button
                           className="btn btn-reject"

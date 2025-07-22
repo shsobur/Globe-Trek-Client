@@ -22,6 +22,7 @@ import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
+import Payment from "../Layouts/Components/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
       {
         path: "/sign-up",
         Component: SignUp,
+      },
+      {
+        path: "/package-payment/:id",
+        Component: Payment,
+        loader: ({params}) => fetch(`http://localhost:8000/package-price/${params.id}`)
       },
     ],
   },
