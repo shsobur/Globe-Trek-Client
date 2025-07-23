@@ -37,7 +37,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-3 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcBinoculars size={28} /> Manage profile
+              <MdOutlineManageAccounts size={30} /> Manage profile
             </NavLink>
 
             <NavLink
@@ -59,7 +59,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcList size={25} /> Add Stories
+              <BiImageAdd size={30} /> Add Stories
             </NavLink>
 
             <NavLink
@@ -70,7 +70,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcExternal size={30} /> Manage Stories
+              <MdManageSearch size={28} /> Manage Stories
             </NavLink>
 
             <NavLink
