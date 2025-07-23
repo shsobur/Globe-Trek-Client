@@ -1,4 +1,10 @@
+// File path__
+import useUserData from "../../Hooks/useUserData";
+
+// From react__
 import { NavLink } from "react-router";
+
+// Package(REACT ICONS)__
 import {
   FcHome,
   FcList,
@@ -7,13 +13,14 @@ import {
   FcBinoculars,
   FcAddDatabase,
 } from "react-icons/fc";
-import useUserData from "../../Hooks/useUserData";
 import {
   MdAddChart,
   MdManageSearch,
   MdOutlineManageAccounts,
 } from "react-icons/md";
 import { BiImageAdd } from "react-icons/bi";
+import { TbBrandBooking } from "react-icons/tb";
+import { VscGitPullRequest } from "react-icons/vsc";
 
 const DashboardNavbar = () => {
   const { currentUserData } = useUserData();
@@ -48,7 +55,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcAddDatabase size={30} /> My Bookings
+              <TbBrandBooking size={30} /> My Bookings
             </NavLink>
 
             <NavLink
@@ -74,14 +81,14 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/join-as-tour-guide-tourist"
+              to="/dashboard/tourist-guide-request"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcList size={25} /> Join as tour guide
+              <VscGitPullRequest size={26} /> Join as tour guide
             </NavLink>
 
             <p className="w-full border border-[#2a75b3]"></p>

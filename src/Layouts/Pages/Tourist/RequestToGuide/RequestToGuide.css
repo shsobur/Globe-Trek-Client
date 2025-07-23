@@ -1,0 +1,72 @@
+.request_guide_section {
+  background-color: #f0f8ff;
+  min-height: 100vh;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.request_guide_container {
+  background-color: white;
+  max-width: 1280px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #0080ff1a;
+}
+
+.request_guide_heading {
+  color: #2a75b3;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.request_guide_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form_group input,
+.form_group textarea {
+  padding: 12px 15px;
+  border: 1px solid #d0dce7;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form_group input:focus,
+.form_group textarea:focus {
+  border-color: #2a75b3;
+  box-shadow: 0 0 0 3px rgba(42, 117, 179, 0.15);
+}
+
+.submit_btn {
+  background-color: #2a75b3;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit_btn:hover {
+  background-color: #225d90;
+}
