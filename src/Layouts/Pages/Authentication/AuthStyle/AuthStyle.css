@@ -101,13 +101,13 @@
 }
 
 .sign_up_button:hover {
-  background-color: #202020;
+  background-color: #03508f;
 }
 
 .auth_image_container {
   width: 70%;
   height: 100%;
-  background-image: url("https://i.postimg.cc/PJ13SCnX/sign-banner.jpg");
+  background-image: url("https://i.postimg.cc/BQNJHvqR/5900926.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

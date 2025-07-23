@@ -74,6 +74,21 @@
   background-color: #c0392b;
 }
 
+.unblock__btn {
+  padding: 8px 14px;
+  background-color: #22d749;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.unblock__btn:hover {
+  background-color: #2bc04b;
+}
+
 @media (max-width: 600px) {
   .manage__filterRow {
     flex-direction: column;

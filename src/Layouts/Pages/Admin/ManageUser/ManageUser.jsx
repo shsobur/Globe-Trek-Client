@@ -4,12 +4,14 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 // From react__
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
   const [allUsers, setAllUsers] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
+  const [useBlockLoading, setUserBlockLoading] = useState(false);
 
   // Fetch users from backend with filters
   useEffect(() => {
@@ -29,6 +31,92 @@ const ManageUser = () => {
 
     fetchUsers();
   }, [searchText, selectedRole, axiosSecure]);
+
+  const handleUserNormalStatus = (id) => {
+    const nweStatus = { status: "Block" };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to block this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Block",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUserBlockLoading(true);
+        axiosSecure
+          .patch(`/update-user-status/${id}`, nweStatus)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              axiosSecure
+                .get("/get-all-users", {
+                  params: { search: searchText, role: selectedRole },
+                })
+                .then((res) => {
+                  if (res.data) {
+                    setAllUsers(res.data);
+                    setUserBlockLoading(false);
+                    Swal.fire({
+                      title: "Blocked!",
+                      text: "User is blocked!",
+                      icon: "success",
+                    });
+                  }
+                })
+                .catch((error) => {
+                  setUserBlockLoading(false);
+                  console.log(error);
+                });
+            }
+          });
+      }
+    });
+  };
+
+  const handleUserBlockStatus = (id) => {
+    const nweStatus = { status: "Normal" };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to unblock this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Unblock",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUserBlockLoading(true);
+        axiosSecure
+          .patch(`/update-user-status/${id}`, nweStatus)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              axiosSecure
+                .get("/get-all-users", {
+                  params: { search: searchText, role: selectedRole },
+                })
+                .then((res) => {
+                  if (res.data) {
+                    setAllUsers(res.data);
+                    setUserBlockLoading(false);
+                    Swal.fire({
+                      title: "Unblocked!",
+                      text: "User is unblocked!",
+                      icon: "success",
+                    });
+                  }
+                })
+                .catch((error) => {
+                  setUserBlockLoading(false);
+                  console.log(error);
+                });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="manage__container">
@@ -74,7 +162,27 @@ const ManageUser = () => {
                 <td>{user.userEmail}</td>
                 <td>{user.gender}</td>
                 <td>
-                  <button className="block__btn">Block</button>
+                  {user.userRole !== "Admin" && (
+                    <>
+                      {user.status === "Normal" && (
+                        <button
+                          onClick={() => handleUserNormalStatus(user._id)}
+                          className="block__btn"
+                        >
+                          {useBlockLoading ? "Blocking..." : "Block"}
+                        </button>
+                      )}
+
+                      {user.status === "Block" && (
+                        <button
+                          onClick={() => handleUserBlockStatus(user._id)}
+                          className="unblock__btn"
+                        >
+                          Unblock
+                        </button>
+                      )}
+                    </>
+                  )}
                 </td>
               </tr>
             ))
