@@ -8,6 +8,12 @@ import {
   FcAddDatabase,
 } from "react-icons/fc";
 import useUserData from "../../Hooks/useUserData";
+import {
+  MdAddChart,
+  MdManageSearch,
+  MdOutlineManageAccounts,
+} from "react-icons/md";
+import { BiImageAdd } from "react-icons/bi";
 
 const DashboardNavbar = () => {
   const { currentUserData } = useUserData();
@@ -20,7 +26,7 @@ const DashboardNavbar = () => {
           Dashboard Menu
         </h2>
 
-        {/* Tourist Navbar */}
+        {/* Tourist Navbar__ */}
         {userRole === "Tourist" && (
           <nav className="flex flex-col items-start space-y-8 text-lg">
             <NavLink
@@ -97,7 +103,7 @@ const DashboardNavbar = () => {
           </nav>
         )}
 
-        {/* Guide Navbar */}
+        {/* Guide Navbar__ */}
         {userRole === "Tour Guide" && (
           <nav className="flex flex-col items-start space-y-8 text-lg">
             <NavLink
@@ -108,7 +114,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-3 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcBinoculars size={28} /> Manage profile
+              <MdOutlineManageAccounts size={30} /> Manage profile
             </NavLink>
 
             <NavLink
@@ -119,7 +125,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcAddDatabase size={30} /> My Assigned Tours
+              <MdAddChart size={28} /> My Assigned Tours
             </NavLink>
 
             <NavLink
@@ -130,7 +136,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcExternal size={30} /> Add Stories
+              <BiImageAdd size={30} /> Add Stories
             </NavLink>
 
             <NavLink
@@ -141,7 +147,7 @@ const DashboardNavbar = () => {
                   : "flex items-center gap-2 w-full text-black p-2 rounded-md hover:bg-[#0060af2f]"
               }
             >
-              <FcList size={25} /> Manage Stories
+              <MdManageSearch size={28} /> Manage Stories
             </NavLink>
 
             <p className="w-full border border-[#2a75b3]"></p>
