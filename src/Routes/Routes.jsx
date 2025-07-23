@@ -24,6 +24,8 @@ import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
+import TouristManageStory from "../Layouts/Pages/Tourist/TouristManageStory/TouristManageStory";
+import GuideManageStory from "../Layouts/Pages/Guide/GuideManageStory/GuideManageStory";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +110,10 @@ const router = createBrowserRouter([
         path: "/dashboard/guide-add-stories",
         element: <GuideAddStories></GuideAddStories>,
       },
+      {
+        path: "/dashboard/guide-manage-stories",
+        element: <GuideManageStory></GuideManageStory>
+      },
 
       // Tourist Routes__
       {
@@ -121,6 +127,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/tourist-add-stories",
         element: <TouristAddStories></TouristAddStories>,
+      },
+      {
+        path: "/dashboard/tourist-manage-story",
+        element: <TouristManageStory></TouristManageStory>,
       },
     ],
   },

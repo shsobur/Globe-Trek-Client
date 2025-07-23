@@ -57,7 +57,7 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/manage-stories-tourist"
+              to="/dashboard/tourist-manage-story"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
@@ -134,7 +134,7 @@ const DashboardNavbar = () => {
             </NavLink>
 
             <NavLink
-              to="/dashboard/manage-stories-guide"
+              to="/dashboard/guide-manage-stories"
               className={({ isActive }) =>
                 isActive
                   ? "w-full p-2 rounded-md bg-[#2a75b3] text-white flex items-center gap-2"
