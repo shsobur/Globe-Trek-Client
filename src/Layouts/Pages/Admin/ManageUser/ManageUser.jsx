@@ -2,9 +2,11 @@
 import "./ManageUser.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+// Package(SWEET ALERT)__
+import Swal from "sweetalert2";
+
 // From react__
 import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,11 +14,13 @@ const ManageUser = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
   const [useBlockLoading, setUserBlockLoading] = useState(false);
+  const [userDataLoading, setUserDataLoading] = useState(false);
 
   // Fetch users from backend with filters
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        setUserDataLoading(true);
         const res = await axiosSecure.get("/get-all-users", {
           params: {
             search: searchText,
@@ -24,7 +28,9 @@ const ManageUser = () => {
           },
         });
         setAllUsers(res.data);
+        setUserDataLoading(false);
       } catch (err) {
+        setUserDataLoading(false);
         console.error("Error fetching users:", err);
       }
     };
@@ -188,9 +194,31 @@ const ManageUser = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="5" style={{ textAlign: "center", padding: "20px" }}>
-                No users found.
-              </td>
+              {userDataLoading ? (
+                <td
+                  colSpan="5"
+                  style={{
+                    textAlign: "center",
+                    padding: "20px",
+                    fontSize: "22px",
+                  }}
+                >
+                  Please wait!
+                  <br />
+                  User data loading...
+                </td>
+              ) : (
+                <td
+                  colSpan="5"
+                  style={{
+                    textAlign: "center",
+                    padding: "20px",
+                    fontSize: "22px",
+                  }}
+                >
+                  No users found.
+                </td>
+              )}
             </tr>
           )}
         </tbody>
