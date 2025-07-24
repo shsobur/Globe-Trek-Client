@@ -24,6 +24,7 @@ const RequestToGuide = () => {
       createdAt: new Date().toISOString(),
       applierEmail: currentUserData.userEmail,
       applierName: currentUserData.userName,
+      currentRole: currentUserData.userRole,
     };
 
     axiosSecure.post("/add-guide-request", requestData).then((res) => {

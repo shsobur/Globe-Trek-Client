@@ -38,7 +38,7 @@
 }
 
 .candidates-table tr:hover {
-  background-color: #f5f5f5;
+  background-color: #fdfdfd;
 }
 
 .candidates-table td {
@@ -74,6 +74,21 @@
 
 .reject:hover {
   background-color: #c82333;
+}
+
+.details {
+  background-color: #3540dc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.details:hover {
+  background-color: #2d37c1;
 }
 
 /* Responsive design */
