@@ -9,7 +9,12 @@ const Overview = () => {
           <h1>About Wanderlust Tours</h1>
 
           <div className="overview_inner_content_parent_container">
-            <div className="overview_content_one">
+            <div
+              data-aos="fade-right"
+              data-aos-easing="linear"
+              data-aos-duration="1500"
+              className="overview_content_one"
+            >
               <iframe
                 width="660"
                 height="370"
@@ -32,21 +37,36 @@ const Overview = () => {
               </p>
 
               <div className="rating_info_container">
-                <div className="rating_container">
+                <div
+                  data-aos="fade-up"
+                  data-aos-easing="linear"
+                  data-aos-duration="1200"
+                  className="rating_container"
+                >
                   <ul>
                     <li>500+</li>
                     <li>Happy Travelers</li>
                   </ul>
                 </div>
 
-                <div className="rating_container">
+                <div
+                  data-aos="fade-up"
+                  data-aos-easing="linear"
+                  data-aos-duration="1400"
+                  className="rating_container"
+                >
                   <ul>
                     <li>50+</li>
                     <li>Destinations</li>
                   </ul>
                 </div>
 
-                <div className="rating_container">
+                <div
+                  data-aos="fade-up"
+                  data-aos-easing="linear"
+                  data-aos-duration="1600"
+                  className="rating_container"
+                >
                   <ul>
                     <li>5★</li>
                     <li>Average Rating</li>

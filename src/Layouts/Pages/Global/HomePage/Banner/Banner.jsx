@@ -44,7 +44,12 @@ const Banner = () => {
         </div>
 
         <div className="main_absolute_container">
-          <div className="abs_inner_content">
+          <div
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+            className="abs_inner_content"
+          >
             <h1>Discover Amazing Places</h1>
             <p>Your journey to extraordinary adventures begins here</p>
             <button>START YOU ADVENTURE</button>

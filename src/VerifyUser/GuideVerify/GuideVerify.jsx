@@ -8,7 +8,7 @@ import { Navigate } from "react-router";
 // From react__
 import { useContext } from "react";
 
-const AdminVerify = ({ children }) => {
+const GuideVerify = ({ children }) => {
   const { user, userLoading } = useContext(AuthContext);
   const { currentUserData, userDataLoading } = useUserData();
 
@@ -46,4 +46,4 @@ const AdminVerify = ({ children }) => {
   return <Navigate to="/sign-in" />;
 };
 
-export default AdminVerify;
+export default GuideVerify;

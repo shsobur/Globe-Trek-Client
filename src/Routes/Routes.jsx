@@ -28,6 +28,8 @@ import TouristManageStory from "../Layouts/Pages/Tourist/TouristManageStory/Tour
 import GuideManageStory from "../Layouts/Pages/Guide/GuideManageStory/GuideManageStory";
 import RequestToGuide from "../Layouts/Pages/Tourist/RequestToGuide/RequestToGuide";
 import AdminVerify from "../VerifyUser/AdminVerify/AdminVerify";
+import GuideVerify from "../VerifyUser/GuideVerify/GuideVerify";
+import TouristVerify from "../VerifyUser/TouristVerify/TouristVerify";
 
 const router = createBrowserRouter([
   {
@@ -85,7 +87,11 @@ const router = createBrowserRouter([
       // Admin Routes__
       {
         path: "/dashboard/admin-manage-profile",
-        element: <ManageProfile></ManageProfile>,
+        element: (
+          <AdminVerify>
+            <ManageProfile></ManageProfile>,
+          </AdminVerify>
+        ),
       },
       {
         path: "/dashboard/admin-add-package",
@@ -105,46 +111,86 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin-manage-candidates",
-        element: <Candidates></Candidates>,
+        element: (
+          <AdminVerify>
+            <Candidates></Candidates>
+          </AdminVerify>
+        ),
       },
       // Tour Guide Routes__
       {
         path: "/dashboard/guide-manage-profile",
-        element: <GuideManageProfile></GuideManageProfile>,
+        element: (
+          <GuideVerify>
+            <GuideManageProfile></GuideManageProfile>,
+          </GuideVerify>
+        ),
       },
       {
         path: "/dashboard/guide-package-booking",
-        element: <GuideBooking></GuideBooking>,
+        element: (
+          <GuideVerify>
+            <GuideBooking></GuideBooking>,
+          </GuideVerify>
+        ),
       },
       {
         path: "/dashboard/guide-add-stories",
-        element: <GuideAddStories></GuideAddStories>,
+        element: (
+          <GuideVerify>
+            <GuideAddStories></GuideAddStories>,
+          </GuideVerify>
+        ),
       },
       {
         path: "/dashboard/guide-manage-stories",
-        element: <GuideManageStory></GuideManageStory>,
+        element: (
+          <GuideVerify>
+            <GuideManageStory></GuideManageStory>,
+          </GuideVerify>
+        ),
       },
 
       // Tourist Routes__
       {
         path: "/dashboard/tourist-manage-profile",
-        element: <TouristManageProfile></TouristManageProfile>,
+        element: (
+          <TouristVerify>
+            <TouristManageProfile></TouristManageProfile>,
+          </TouristVerify>
+        ),
       },
       {
         path: "/dashboard/tourist-manage-booking",
-        element: <MyBooking></MyBooking>,
+        element: (
+          <TouristVerify>
+            <MyBooking></MyBooking>,
+          </TouristVerify>
+        ),
       },
       {
         path: "/dashboard/tourist-add-stories",
-        element: <TouristAddStories></TouristAddStories>,
+        element: (
+          <TouristVerify>
+            <TouristAddStories></TouristAddStories>,
+          </TouristVerify>
+        ),
       },
       {
         path: "/dashboard/tourist-manage-story",
-        element: <TouristManageStory></TouristManageStory>,
+        element: (
+          <TouristVerify>
+            <TouristManageStory></TouristManageStory>,
+          </TouristVerify>
+        ),
       },
       {
         path: "/dashboard/tourist-guide-request",
-        element: <RequestToGuide></RequestToGuide>,
+        element: (
+          <TouristVerify>
+            <RequestToGuide></RequestToGuide>,
+          </TouristVerify>
+        ),
       },
     ],
   },
