@@ -1,7 +1,12 @@
+// File path__
 import "./Candidates.css";
-import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+
+// Package(SWEET ALERT)__
+import Swal from "sweetalert2";
+
+// From react__
+import { useEffect, useState } from "react";
 
 const Candidates = () => {
   const axiosSecure = useAxiosSecure();
