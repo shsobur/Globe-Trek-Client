@@ -1,36 +1,41 @@
-// File path__
 import useAxiosPublic from "./useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
-
-// From react__
 import { useContext, useEffect, useState } from "react";
 
 const useUserData = () => {
   const axiosPublic = useAxiosPublic();
-  const { user } = useContext(AuthContext);
+  const { user, userLoading } = useContext(AuthContext);
   const [currentUserData, setCurrentUserData] = useState(null);
-  const [userDataLoading, setUserDataLoading] = useState(false);
+  const [userDataLoading, setUserDataLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
 
     const handleCurrentUserData = async () => {
-      if (user) {
-        setUserDataLoading(true);
+      if (!userLoading) {
+        if (user?.email) {
+          setUserDataLoading(true);
 
-        try {
-          const res = await axiosPublic.get(`/current-user-data/${user.email}`);
+          try {
+            const res = await axiosPublic.get(
+              `/current-user-data/${user.email}`
+            );
 
-          if (isMounted) {
-            setCurrentUserData(res.data);
+            if (isMounted) {
+              setCurrentUserData(res.data);
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+            if (isMounted) setCurrentUserData(null);
+          } finally {
+            if (isMounted) setUserDataLoading(false);
           }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        } finally {
-          setUserDataLoading(false);
+        } else {
+          if (isMounted) {
+            setCurrentUserData(null);
+            setUserDataLoading(false);
+          }
         }
-      } else if (!user) {
-        setCurrentUserData([]);
       }
     };
 
@@ -40,6 +45,7 @@ const useUserData = () => {
       isMounted = false;
     };
   }, [user, axiosPublic]);
+
   return { currentUserData, userDataLoading };
 };
 

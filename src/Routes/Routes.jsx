@@ -27,6 +27,7 @@ import { createBrowserRouter } from "react-router";
 import TouristManageStory from "../Layouts/Pages/Tourist/TouristManageStory/TouristManageStory";
 import GuideManageStory from "../Layouts/Pages/Guide/GuideManageStory/GuideManageStory";
 import RequestToGuide from "../Layouts/Pages/Tourist/RequestToGuide/RequestToGuide";
+import AdminVerify from "../VerifyUser/AdminVerify/AdminVerify";
 
 const router = createBrowserRouter([
   {
@@ -88,11 +89,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin-add-package",
-        element: <AddPackage></AddPackage>,
+        element: (
+          <AdminVerify>
+            <AddPackage></AddPackage>,
+          </AdminVerify>
+        ),
       },
       {
         path: "/dashboard/admin-manage-user",
-        element: <ManageUser></ManageUser>,
+        element: (
+          <AdminVerify>
+            <ManageUser></ManageUser>
+          </AdminVerify>
+        ),
       },
       {
         path: "/dashboard/admin-manage-candidates",

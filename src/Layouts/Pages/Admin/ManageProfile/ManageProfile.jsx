@@ -3,9 +3,9 @@ import "./ManageProfile.css";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
-// Package(REACT-HOOK-FORM, SWEETALERT2)__
-import { useForm } from "react-hook-form";
+// Package(REACT-HOOK-FORM, SWEET ALERT)__
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 // From react__
 import { useRef, useState } from "react";

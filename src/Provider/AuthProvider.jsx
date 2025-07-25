@@ -24,7 +24,6 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
-  console.log(user);
 
   // Sign in with google__
   const handleGoogleSignIn = async () => {
@@ -99,8 +98,6 @@ const AuthProvider = ({ children }) => {
 
   // Monitor user__
   useEffect(() => {
-    setUserLoading(true);
-
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setUserLoading(false);

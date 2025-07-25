@@ -5,27 +5,20 @@ import useUserData from "../../Hooks/useUserData";
 import { NavLink } from "react-router";
 
 // Package(REACT ICONS)__
-import {
-  FcHome,
-  FcList,
-  FcRedo,
-  FcExternal,
-  FcBinoculars,
-  FcAddDatabase,
-} from "react-icons/fc";
+import { BiImageAdd } from "react-icons/bi";
+import { BsDatabaseAdd } from "react-icons/bs";
+import { TbBrandBooking } from "react-icons/tb";
+import { FcHome, FcRedo } from "react-icons/fc";
 import {
   MdAddChart,
   MdManageSearch,
-  MdOutlineManageAccounts,
   MdOutlineManageSearch,
+  MdOutlineManageAccounts,
 } from "react-icons/md";
-import { BiImageAdd } from "react-icons/bi";
-import { TbBrandBooking } from "react-icons/tb";
 import {
   VscGitPullRequest,
   VscGitPullRequestGoToChanges,
 } from "react-icons/vsc";
-import { BsDatabaseAdd } from "react-icons/bs";
 
 const DashboardNavbar = () => {
   const { currentUserData } = useUserData();
