@@ -44,7 +44,7 @@ const useUserData = () => {
     return () => {
       isMounted = false;
     };
-  }, [user, axiosPublic]);
+  }, [user, axiosPublic, userLoading]);
 
   return { currentUserData, userDataLoading };
 };

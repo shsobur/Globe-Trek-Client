@@ -11,7 +11,6 @@ import { useContext } from "react";
 const AdminVerify = ({ children }) => {
   const { user, userLoading } = useContext(AuthContext);
   const { currentUserData, userDataLoading } = useUserData();
-  console.log(currentUserData);
 
   if (userLoading) {
     return (
