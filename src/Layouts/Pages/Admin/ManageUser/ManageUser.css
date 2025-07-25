@@ -89,6 +89,21 @@
   background-color: #2bc04b;
 }
 
+.profile_btn {
+  padding: 8px 14px;
+  background-color: #225bd7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.profile_btn:hover {
+  background-color: #1e50bc;
+}
+
 @media (max-width: 600px) {
   .manage__filterRow {
     flex-direction: column;

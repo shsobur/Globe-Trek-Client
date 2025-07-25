@@ -30,6 +30,7 @@ import RequestToGuide from "../Layouts/Pages/Tourist/RequestToGuide/RequestToGui
 import AdminVerify from "../VerifyUser/AdminVerify/AdminVerify";
 import GuideVerify from "../VerifyUser/GuideVerify/GuideVerify";
 import TouristVerify from "../VerifyUser/TouristVerify/TouristVerify";
+import LoginVerify from "../VerifyUser/LoginVerify/LoginVerify";
 
 const router = createBrowserRouter([
   {
@@ -51,17 +52,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/trips",
-        element: <Trips></Trips>,
+        element: (
+          <LoginVerify>
+            <Trips></Trips>,
+          </LoginVerify>
+        ),
       },
       {
         path: "/package-details/:id",
-        element: <PackageDetails></PackageDetails>,
+        element: (
+          <LoginVerify>
+            <PackageDetails></PackageDetails>,
+          </LoginVerify>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:8000/get-package-details/${params.id}`),
       },
       {
-        path: "/profile",
-        element: <Profile></Profile>,
+        path: "/profile/:id",
+        element: (
+          <LoginVerify>
+            <Profile></Profile>,
+          </LoginVerify>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/get-profile-data/${params.id}`),
       },
       {
         path: "/sign-in",
@@ -73,7 +88,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/package-payment/:id",
-        element: <Payment></Payment>,
+        element: (
+          <LoginVerify>
+            <Payment></Payment>,
+          </LoginVerify>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:8000/package-price/${params.id}`),
       },

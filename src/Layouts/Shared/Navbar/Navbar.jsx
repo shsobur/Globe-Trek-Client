@@ -170,7 +170,7 @@ const Navbar = () => {
                 )}
 
                 {user && (
-                  <NavLink to="/profile">
+                  <NavLink to={`/profile/${currentUserData?._id}`}>
                     <span
                       onClick={() => setOpen(!open)}
                       className="dropdown_item"

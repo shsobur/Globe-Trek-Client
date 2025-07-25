@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 // From react__
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -157,6 +158,7 @@ const ManageUser = () => {
             <th>Email</th>
             <th>Gender</th>
             <th>Action</th>
+            <th>Profile</th>
           </tr>
         </thead>
         <tbody>
@@ -188,6 +190,13 @@ const ManageUser = () => {
                         </button>
                       )}
                     </>
+                  )}
+                </td>
+                <td>
+                  {user.userRole !== "Admin" && (
+                    <button className="profile_btn">
+                      <Link to={`/profile/${user._id}`}>Profile</Link>
+                    </button>
                   )}
                 </td>
               </tr>

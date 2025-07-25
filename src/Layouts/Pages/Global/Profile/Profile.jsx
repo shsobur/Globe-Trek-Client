@@ -1,9 +1,9 @@
 // File path__
 import "./Profile.css";
-import useUserData from "../../../Hooks/useUserData";
+import { useLoaderData } from "react-router";
 
 const Profile = () => {
-  const { currentUserData } = useUserData();
+  const currentUserData = useLoaderData();
 
   return (
     <>
