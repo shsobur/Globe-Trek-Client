@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import "./Candidates.css";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Candidates = () => {
   const axiosSecure = useAxiosSecure();
@@ -53,7 +53,34 @@ const Candidates = () => {
     });
   };
 
-  const handleReject = () => {};
+  const handleReject = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to reject the request?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, reject",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/delete-guide-request/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            axiosSecure.get("/get-all-guide-request").then((res) => {
+              if (res.data) {
+                setRequestData(res.data);
+                Swal.fire({
+                  title: "Rejected!",
+                  text: "This request is rejected",
+                  icon: "success",
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div className="manage-candidates">
@@ -95,7 +122,7 @@ const Candidates = () => {
                       Accept
                     </button>
                     <button
-                      onClick={() => handleReject(data.applierEmail)}
+                      onClick={() => handleReject(data._id)}
                       className="reject"
                     >
                       Reject
