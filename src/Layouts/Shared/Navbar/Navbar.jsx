@@ -126,6 +126,17 @@ const Navbar = () => {
                 <li>Community</li>
               </NavLink>
 
+              {user && (
+                <NavLink
+                  to="/trips"
+                  className={({ isActive }) =>
+                    isActive ? "route_active_style" : "router_none_active_style"
+                  }
+                >
+                  <li>Trips</li>
+                </NavLink>
+              )}
+
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
@@ -133,24 +144,6 @@ const Navbar = () => {
                 }
               >
                 <li>About Us</li>
-              </NavLink>
-
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  isActive ? "route_active_style" : "router_none_active_style"
-                }
-              >
-                <li>Contact</li>
-              </NavLink>
-
-              <NavLink
-                to="/trips"
-                className={({ isActive }) =>
-                  isActive ? "route_active_style" : "router_none_active_style"
-                }
-              >
-                <li>Trips</li>
               </NavLink>
             </ul>
 

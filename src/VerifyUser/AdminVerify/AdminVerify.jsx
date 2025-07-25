@@ -16,7 +16,7 @@ const AdminVerify = ({ children }) => {
     return (
       <>
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30">
-          <div className="bg-white shadow-xl px-6 py-4 rounded-2xl animate-bounce text-[#2a75b3] text-lg font-semibold">
+          <div className="bg-blue-300 shadow-xl px-6 py-4 rounded-2xl animate-bounce text-[#2a75b3] text-lg font-semibold">
             Loading Dashboard...
           </div>
         </div>
@@ -43,7 +43,7 @@ const AdminVerify = ({ children }) => {
     }
   }
 
-  return <Navigate to="/sign-in" />;
+  return <Navigate to="/sign-in" replace />;
 };
 
 export default AdminVerify;
