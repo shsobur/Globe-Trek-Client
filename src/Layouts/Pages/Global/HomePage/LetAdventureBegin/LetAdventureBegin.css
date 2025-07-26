@@ -1,0 +1,66 @@
+.adventure_section {
+  height: 100vh;
+  max-width: 1920px;
+  background: linear-gradient(135deg, #d1edff77, #f7faff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.adventure_container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.adventure_container h2 {
+  font-size: 48px;
+  color: #2a75b3;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.adventure_container p {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.fun_facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.fact_card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  padding: 30px 20px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.fact_card:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.fact_card span {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.fact_card h3 {
+  font-size: 28px;
+  color: #2a75b3;
+}
+
+.fact_card p {
+  color: #555;
+  margin-top: 5px;
+  font-size: 16px;
+}
