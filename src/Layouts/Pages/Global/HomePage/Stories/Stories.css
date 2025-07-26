@@ -1,0 +1,24 @@
+#stories_section {
+  color: #151515;
+  background-color: #ffffff;
+}
+
+.main_stories_container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 100px 10px;
+}
+
+.story_section_heading {
+  font-size: 4rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.story_card_parent_container {
+  width: 100%;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin-top: 50px;
+}
