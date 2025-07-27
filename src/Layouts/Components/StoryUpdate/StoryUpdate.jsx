@@ -1,6 +1,8 @@
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+// File path__
 import "./StoryUpdate.css";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
+import Swal from "sweetalert2";
 import { useState } from "react";
 
 const StoryUpdate = ({ item }) => {
@@ -10,11 +12,7 @@ const StoryUpdate = ({ item }) => {
   const [images, setImages] = useState(item.images || []);
   const [updateLoading, setUpdateLoading] = useState(false);
 
-  const initialTitle = item.title;
-  const initialContent = item.content;
-  const initialImages = item.images || [];
-
-  const handleDeleteImage = async (index) => {
+  const handleDeleteImage = (index) => {
     const updated = images.filter((_, i) => i !== index);
     setImages(updated);
   };
@@ -22,51 +20,53 @@ const StoryUpdate = ({ item }) => {
   const handleUpdate = async () => {
     const updateData = {};
 
-    if (title !== initialTitle) updateData.title = title;
-    if (content !== initialContent) updateData.content = content;
-    if (JSON.stringify(images) !== JSON.stringify(initialImages)) {
+    if (title !== item.title) updateData.title = title;
+    if (content !== item.content) updateData.content = content;
+    if (JSON.stringify(images) !== JSON.stringify(item.images)) {
       updateData.images = images;
     }
 
-    if (Object.keys(updateData).length === 0) {
-      return;
-    }
+    if (Object.keys(updateData).length === 0) return;
 
     setUpdateLoading(true);
-    await axiosSecure.patch(`/update-story/${item._id}`, updateData).then((res) => {
+    try {
+      const res = await axiosSecure.patch(
+        `/update-story/${item._id}`,
+        updateData
+      );
       if (res.data.modifiedCount) {
         setUpdateLoading(false);
-        document.getElementById("close_btn").click();
+        document.getElementById(`close_btn_${item._id}`).click();
         Swal.fire({
-          title: "Story Update successful",
+          title: "Story updated successfully!",
           icon: "success",
-          draggable: true,
         });
-      } else
-        (error) => {
-          setUpdateLoading(false);
-          console.log(error);
-        };
-    });
+      }
+    } catch (error) {
+      setUpdateLoading(false);
+      console.error(error);
+    }
   };
 
   return (
-    <div>
+    <>
+      {/* Open Modal Button */}
       <button
         onClick={() =>
-          document.getElementById("story_update_modal").showModal()
+          document.getElementById(`story_update_modal_${item._id}`).showModal()
         }
         className="story_update_bnt"
       >
         Update
       </button>
 
-      <dialog id="story_update_modal" className="modal">
+      {/* Modal */}
+      <dialog id={`story_update_modal_${item._id}`} className="modal">
         <div className="modal-box w-full max-w-2xl">
           <form method="dialog">
             <button
-              id="close_btn"
-              className="btn btn-sm btn-circle btn-ghost absolute left-[450px]"
+              id={`close_btn_${item._id}`}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             >
               ✕
             </button>
@@ -83,7 +83,7 @@ const StoryUpdate = ({ item }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                defaultValue={initialTitle}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
@@ -92,9 +92,9 @@ const StoryUpdate = ({ item }) => {
             <div>
               <label className="block mb-1 font-medium">Content</label>
               <textarea
-                rows="15"
+                rows="10"
                 className="textarea textarea-bordered w-full"
-                defaultValue={initialContent}
+                value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
             </div>
@@ -140,7 +140,7 @@ const StoryUpdate = ({ item }) => {
           </div>
         </div>
       </dialog>
-    </div>
+    </>
   );
 };
 

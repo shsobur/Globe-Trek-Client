@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 // From react__
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import StoryUpdate from "../../../Components/StoryUpdate/StoryUpdate";
 
 const GuideManageStory = () => {
   const { currentUserData } = useUserData();
@@ -79,12 +80,19 @@ const GuideManageStory = () => {
                 <img src={item.images[0]} alt="Story" className="story_image" />
                 <div className="story_info">
                   <h2 className="story_title">{item.title}</h2>
-                  <button
-                    onClick={() => handleDeleteStory(item._id)}
-                    className="delete_btn"
-                  >
-                    Delete
-                  </button>
+                  
+                  <div className="story_button_container">
+                    <button>
+                      <StoryUpdate item={item}></StoryUpdate>
+                    </button>
+                    <button
+                      onClick={() => handleDeleteStory(item._id)}
+                      className="delete_btn"
+                    >
+                      Delete
+                    </button>
+                  </div>
+
                 </div>
               </div>
             ))}
