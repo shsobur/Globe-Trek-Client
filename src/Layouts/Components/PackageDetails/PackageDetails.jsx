@@ -8,7 +8,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useLoaderData, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 
 // From react__
 import { useContext, useEffect, useState } from "react";
@@ -294,7 +294,11 @@ const PackageDetails = () => {
                           {guide.userEmail} experience
                         </span>
                       </div>
-                      <button className="view-profile-btn">View Profile</button>
+                      <Link to={`/profile/${guide._id}`}>
+                        <button className="view-profile-btn">
+                          View Profile
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 ))}

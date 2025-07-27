@@ -8,14 +8,29 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 
 // From react__
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ManageProfile = () => {
   const dialogRef = useRef(null);
   const axiosSecure = useAxiosSecure();
+  const [status, setStatus] = useState({});
   const { currentUserData } = useUserData();
   const { register, handleSubmit, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  useEffect(() => {
+    axiosSecure.get("/admin-dashboard-stats").then((res) => {
+      if (res.data) {
+        setStatus(res.data);
+        setStatusLoading(false);
+      } else
+        (error) => {
+          setStatusLoading(false);
+          console.log(error);
+        };
+    });
+  }, [axiosSecure]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -94,7 +109,7 @@ const ManageProfile = () => {
           <div className="profile__statIcon">💰</div>
           <div className="profile__statContent">
             <h3>Total Revenue</h3>
-            <p>$58,000</p>
+            <p>৳{statusLoading ? "..." : status?.totalIncome / 100}</p>
           </div>
         </div>
 
@@ -102,7 +117,7 @@ const ManageProfile = () => {
           <div className="profile__statIcon">👥</div>
           <div className="profile__statContent">
             <h3>Tour Guides</h3>
-            <p>120</p>
+            <p>{statusLoading ? "..." : status?.totalGuide}</p>
           </div>
         </div>
 
@@ -110,7 +125,7 @@ const ManageProfile = () => {
           <div className="profile__statIcon">📦</div>
           <div className="profile__statContent">
             <h3>Active Packages</h3>
-            <p>55</p>
+            <p>{statusLoading ? "..." : status?.totalPackage}</p>
           </div>
         </div>
 
@@ -118,7 +133,7 @@ const ManageProfile = () => {
           <div className="profile__statIcon">🎯</div>
           <div className="profile__statContent">
             <h3>Total Clients</h3>
-            <p>1,200</p>
+            <p>{statusLoading ? "..." : status?.totalTourist}</p>
           </div>
         </div>
 
@@ -126,7 +141,7 @@ const ManageProfile = () => {
           <div className="profile__statIcon">📖</div>
           <div className="profile__statContent">
             <h3>Success Stories</h3>
-            <p>42</p>
+            <p>{statusLoading ? "..." : status?.totalTour}</p>
           </div>
         </div>
       </div>

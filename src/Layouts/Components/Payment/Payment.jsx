@@ -82,12 +82,25 @@ const Payment = () => {
           .patch(`/update-booking-status/${bookingId}`, newBookingData)
           .then((res) => {
             if (res.data.modifiedCount) {
-              navigate("/dashboard/tourist-manage-booking");
+              const paymentData = {
+                id: paymentIntent.id,
+                amount: paymentIntent.amount,
+                currency: paymentIntent.currency,
+                method: paymentIntent.payment_method,
+                created: paymentIntent.created,
+              };
+              console.log(paymentData);
 
-              Swal.fire({
-                title: "Payment Successful",
-                icon: "success",
-                draggable: true,
+              axiosSecure.post("/payment-history", paymentData).then((res) => {
+                if (res.data.insertedId) {
+                  navigate("/dashboard/tourist-manage-booking");
+
+                  Swal.fire({
+                    title: "Payment Successful",
+                    icon: "success",
+                    draggable: true,
+                  });
+                }
               });
             }
           });

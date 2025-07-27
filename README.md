@@ -9,8 +9,6 @@
 - **Admin Username:** shsoburhossen951@gmail.com
 - **Admin Password:** Sobur hossen
 
-> Replace with your actual credentials before deployment.
-
 ---
 
 ## 🔗 Live Site
