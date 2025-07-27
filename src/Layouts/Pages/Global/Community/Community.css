@@ -58,11 +58,14 @@
 .stories_like_container {
   margin-top: 20px;
   font-size: 1.5rem;
-  transition: 0.3s ease-in-out;
 }
 
-.stories_like_container span:hover {
-  transform: scale(1.1);
+.stories_like_container span button {
+  transition: 0.2s ease-in-out;
+}
+
+.stories_like_container span button:hover {
+  transform: scale(1.06);
 }
 
 /* Image modal style__ */
