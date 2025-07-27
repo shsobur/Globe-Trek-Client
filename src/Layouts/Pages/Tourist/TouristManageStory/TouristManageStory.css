@@ -39,9 +39,11 @@
 
 .story_info {
   padding: 1rem;
+  gap: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 }
 
 .story_title {
@@ -50,8 +52,12 @@
   font-weight: 600;
 }
 
+.story_button_container {
+  gap: 20px;
+  display: flex;
+}
+
 .delete_btn {
-  background-color: #2a75b3;
   color: white;
   padding: 0.4rem 1rem;
   border: none;
@@ -61,5 +67,5 @@
 }
 
 .delete_btn:hover {
-  background-color: #1e5b8c;
+  background-color: #8c2b1e;
 }

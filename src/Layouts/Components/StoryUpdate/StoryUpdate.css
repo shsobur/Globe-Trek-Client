@@ -1,0 +1,10 @@
+.story_update_bnt {
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-color: #008cff;
+}
+
+.story_update_bnt:hover {
+  background-color: #006eff;
+}
