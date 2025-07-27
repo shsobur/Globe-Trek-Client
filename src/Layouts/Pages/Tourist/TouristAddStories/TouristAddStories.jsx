@@ -8,10 +8,12 @@ import Swal from "sweetalert2";
 
 // From react__
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 const TouristAddStories = () => {
-  const { currentUserData } = useUserData();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { currentUserData } = useUserData();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -103,6 +105,8 @@ const TouristAddStories = () => {
 
       window.scrollTo(0, 0);
       setStoriesUploadLoading(false);
+
+      navigate("/dashboard/tourist-manage-story");
     }
   };
 
