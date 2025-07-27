@@ -6,8 +6,8 @@
 
 ## 🔑 Admin Access
 
-- **Admin Username:** admin@example.com  
-- **Admin Password:** Admin@123
+- **Admin Username:** shsoburhossen951@gmail.com
+- **Admin Password:** Sobur hossen
 
 > Replace with your actual credentials before deployment.
 
