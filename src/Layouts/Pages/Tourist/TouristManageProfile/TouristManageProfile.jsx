@@ -1,9 +1,15 @@
+// File path__
 import "./TouristManageProfile.css";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+
+// Package(REACT HOOK FORM, SWEET ALERT, REACT ROUTER)__
 import Swal from "sweetalert2";
+import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+
+// From react__
+import React, { useRef, useState } from "react";
 
 const TouristManageProfile = () => {
   const dialogRef = useRef(null);
@@ -387,6 +393,9 @@ const TouristManageProfile = () => {
                 )}
               </span>
             </div>
+            <Link to={"/dashboard/tourist-guide-request"}>
+              <button className="btn btn-primary">Join as Tour Guide</button>
+            </Link>
           </div>
         </div>
       </div>
