@@ -3,6 +3,7 @@ import "./Community.css";
 import useUserData from "../../../Hooks/useUserData";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
 // Package(SWEET ALERT, REACT ROUTER, REACT ICONS, REACT SHEAR)__
 import Swal from "sweetalert2";
@@ -12,8 +13,6 @@ import { FacebookShareButton } from "react-share";
 
 // From react__
 import { useContext, useEffect, useState } from "react";
-
-// React Share__
 
 const Community = () => {
   const { user } = useContext(AuthContext);
@@ -69,6 +68,7 @@ const Community = () => {
 
   return (
     <>
+      <ScrollToTop></ScrollToTop>
       <section id="community_section">
         <div className="main_community_container">
           <h1 className="community_title">Explore Our Community</h1>

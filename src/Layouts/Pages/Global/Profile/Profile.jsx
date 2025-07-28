@@ -1,5 +1,8 @@
 // File path__
 import "./Profile.css";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
+
+// Package(REACT ROUTER)__
 import { useLoaderData } from "react-router";
 
 const Profile = () => {
@@ -7,6 +10,7 @@ const Profile = () => {
 
   return (
     <>
+      <ScrollToTop></ScrollToTop>
       <section id="profile_section">
         <div className="main_profile_container">
           <div className="profile_content_parent_container">

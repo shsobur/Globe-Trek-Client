@@ -1,11 +1,20 @@
 // File path__
 import "./Package.css";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+
+// Package(REACT ROUTER)__
+import { Link } from "react-router";
 
 // From react__
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Package = () => {
+  const axiosPublic = useAxiosPublic();
   const [tabActive, setTabActive] = useState(0);
+  const [packageData, setPackageData] = useState([]);
+  const [guideData, setGuideData] = useState([]);
+  const [packageLoading, setPackageLoading] = useState(true);
+  const [guideLoading, setGuideLoading] = useState(true);
 
   const tabs = [
     {
@@ -17,6 +26,30 @@ const Package = () => {
       title: "Meet Out Tour Guide",
     },
   ];
+
+  // Fetch Package Data__
+  useEffect(() => {
+    axiosPublic.get("/random-packages").then((res) => {
+      if (res.data) {
+        setPackageData(res.data);
+        setPackageLoading(false);
+      } else {
+        setPackageLoading(false);
+      }
+    });
+  }, [axiosPublic]);
+
+  // Fetch Guide Data__
+  useEffect(() => {
+    axiosPublic.get("/random-guide").then((res) => {
+      if (res.data) {
+        setGuideData(res.data);
+        setGuideLoading(false);
+      } else {
+        setPackageLoading(false);
+      }
+    });
+  }, [axiosPublic]);
 
   return (
     <>
@@ -42,38 +75,56 @@ const Package = () => {
 
           <div className="package_card_display_container">
             {tabActive === 0 && (
-              <div className="package_card_main_container">
-                <div className="package_image_container">
-                  <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
-                    alt="Card Image"
-                  />
-                </div>
-                <div className="package_card_info_container">
-                  <h3>Beach & Relaxation</h3>
-                  <h2>Tropical Paradise Getaway</h2>
-                  <p>7 days in beautiful tropical islands</p>
-                  <span>$1,299</span>
-                  <button>View Details</button>
-                </div>
-              </div>
+              <>
+                {packageLoading
+                  ? "Package Loading..."
+                  : packageData.map((item) => {
+                      return (
+                        <div
+                          key={item._id}
+                          className="package_card_main_container"
+                        >
+                          <div className="package_image_container">
+                            <img src={item.images[0]} alt="Card Image" />
+                          </div>
+                          <div className="package_card_info_container">
+                            <h3>Beach & Relaxation</h3>
+                            <h2>{item.title}</h2>
+                            <p>{item.duration}</p>
+                            <span>${item.price}</span>
+                            <Link to={`/package-details/${item._id}`}>
+                              <button>View Details</button>
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })}
+              </>
             )}
 
             {tabActive === 1 && (
-              <div className="guide_card_main_container">
-                <div className="guide_image_container">
-                  <img
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-                    alt="Guid Image"
-                  />
-                </div>
-                <div className="guide_info_container">
-                  <h2>Emma Rodriguez</h2>
-                  <p>Beach & Island Guide</p>
-                  <span>6 Years Experience</span>
-                  <button>Details</button>
-                </div>
-              </div>
+              <>
+                {guideLoading
+                  ? "Guide Loading..."
+                  : guideData.map((guide) => (
+                      <div
+                        key={guide._id}
+                        className="guide_card_main_container"
+                      >
+                        <div className="guide_image_container">
+                          <img src={guide.userPhoto} alt="Guide Image" />
+                        </div>
+                        <div className="guide_info_container">
+                          <h2>{guide.name}</h2>
+                          <p>{guide.userRole || "Tour Guide"}</p>
+                          <span>
+                            {guide.userAddress || "2 Years Experience"}
+                          </span>
+                          <button>Details</button>
+                        </div>
+                      </div>
+                    ))}
+              </>
             )}
           </div>
         </div>

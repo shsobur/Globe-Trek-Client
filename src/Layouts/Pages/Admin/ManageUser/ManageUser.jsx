@@ -1,13 +1,14 @@
 // File path__
 import "./ManageUser.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
-// Package(SWEET ALERT)__
+// Package(SWEET ALERT, REACT ROUTER)__
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 // From react__
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,7 +18,6 @@ const ManageUser = () => {
   const [useBlockLoading, setUserBlockLoading] = useState(false);
   const [userDataLoading, setUserDataLoading] = useState(false);
 
-  // Fetch users from backend with filters
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -126,113 +126,116 @@ const ManageUser = () => {
   };
 
   return (
-    <div className="manage__container">
-      <h2 className="manage__title">Manage Users</h2>
+    <>
+      <ScrollToTop></ScrollToTop>
+      <div className="manage__container">
+        <h2 className="manage__title">Manage Users</h2>
 
-      <div className="manage__filterRow">
-        <input
-          type="text"
-          placeholder="Search by name or email"
-          className="manage__search"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
+        <div className="manage__filterRow">
+          <input
+            type="text"
+            placeholder="Search by name or email"
+            className="manage__search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
 
-        <select
-          className="manage__dropdown"
-          value={selectedRole}
-          onChange={(e) => setSelectedRole(e.target.value)}
-        >
-          <option value="">Filter by Role</option>
-          <option value="Admin">Admin</option>
-          <option value="Tourist">Tourist</option>
-          <option value="Tour Guide">Tour Guide</option>
-        </select>
-      </div>
+          <select
+            className="manage__dropdown"
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+          >
+            <option value="">Filter by Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Tourist">Tourist</option>
+            <option value="Tour Guide">Tour Guide</option>
+          </select>
+        </div>
 
-      <table className="user__table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Action</th>
-            <th>Profile</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allUsers.length > 0 ? (
-            allUsers.map((user) => (
-              <tr key={user._id}>
-                <td>{user.userName}</td>
-                <td>{user.userRole}</td>
-                <td>{user.userEmail}</td>
-                <td>{user.gender}</td>
-                <td>
-                  {user.userRole !== "Admin" && (
-                    <>
-                      {user.status === "Normal" && (
-                        <button
-                          onClick={() => handleUserNormalStatus(user._id)}
-                          className="block__btn"
-                        >
-                          {useBlockLoading ? "Blocking..." : "Block"}
-                        </button>
-                      )}
-
-                      {user.status === "Block" && (
-                        <button
-                          onClick={() => handleUserBlockStatus(user._id)}
-                          className="unblock__btn"
-                        >
-                          Unblock
-                        </button>
-                      )}
-                    </>
-                  )}
-                </td>
-                <td>
-                  {user.userRole !== "Admin" && (
-                    <button className="profile_btn">
-                      <Link to={`/profile/${user._id}`}>Profile</Link>
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))
-          ) : (
+        <table className="user__table">
+          <thead>
             <tr>
-              {userDataLoading ? (
-                <td
-                  colSpan="5"
-                  style={{
-                    textAlign: "center",
-                    padding: "20px",
-                    fontSize: "22px",
-                  }}
-                >
-                  Please wait!
-                  <br />
-                  User data loading...
-                </td>
-              ) : (
-                <td
-                  colSpan="5"
-                  style={{
-                    textAlign: "center",
-                    padding: "20px",
-                    fontSize: "22px",
-                  }}
-                >
-                  No users found.
-                </td>
-              )}
+              <th>Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Action</th>
+              <th>Profile</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {allUsers.length > 0 ? (
+              allUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.userName}</td>
+                  <td>{user.userRole}</td>
+                  <td>{user.userEmail}</td>
+                  <td>{user.gender}</td>
+                  <td>
+                    {user.userRole !== "Admin" && (
+                      <>
+                        {user.status === "Normal" && (
+                          <button
+                            onClick={() => handleUserNormalStatus(user._id)}
+                            className="block__btn"
+                          >
+                            {useBlockLoading ? "Blocking..." : "Block"}
+                          </button>
+                        )}
+
+                        {user.status === "Block" && (
+                          <button
+                            onClick={() => handleUserBlockStatus(user._id)}
+                            className="unblock__btn"
+                          >
+                            Unblock
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </td>
+                  <td>
+                    {user.userRole !== "Admin" && (
+                      <button className="profile_btn">
+                        <Link to={`/profile/${user._id}`}>Profile</Link>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                {userDataLoading ? (
+                  <td
+                    colSpan="5"
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      fontSize: "22px",
+                    }}
+                  >
+                    Please wait!
+                    <br />
+                    User data loading...
+                  </td>
+                ) : (
+                  <td
+                    colSpan="5"
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      fontSize: "22px",
+                    }}
+                  >
+                    No users found.
+                  </td>
+                )}
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

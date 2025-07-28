@@ -2,21 +2,21 @@
 import "../AuthStyle/AuthStyle.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../../Provider/AuthProvider";
-import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
-// Package(SWEET ALERT, REACT HOOK FROM, REACT ICONS)__
+// Package(SWEET ALERT, REACT HOOK FROM, REACT ICONS, REACT ROUTER)__
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { TiHomeOutline } from "react-icons/ti";
 import { Link, useNavigate } from "react-router";
 
 // Form react__
-import { use } from "react";
+import { useContext } from "react";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const { handleUserProfile, handleCreateUser, loading } = use(AuthContext);
+  const { handleUserProfile, handleCreateUser, loading } = useContext(AuthContext);
   const {
     watch,
     register,
@@ -84,6 +84,7 @@ const SignUp = () => {
 
   return (
     <>
+      <ScrollToTop></ScrollToTop>
       <section id="signup_section">
         <div className="main_auth_container">
           <div className="auth_from_parent_container">
@@ -98,8 +99,6 @@ const SignUp = () => {
                   </Link>
                 </h1>
                 <p>Create a free account</p>
-
-                <SocialLogin></SocialLogin>
 
                 <div className="auth_input_container">
                   <p>Name</p>

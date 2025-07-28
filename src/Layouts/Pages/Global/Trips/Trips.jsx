@@ -1,6 +1,7 @@
 // File path__
 import "./Trips.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
 // Package(REACT ROUTER)__
 import { Link } from "react-router";
@@ -24,6 +25,7 @@ const Trips = () => {
 
   return (
     <>
+      <ScrollToTop></ScrollToTop>
       <section id="tripe_section">
         <div className="trips-container">
           <div className="trips-header">

@@ -3,7 +3,7 @@ import "../AuthStyle/AuthStyle.css";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 
-// Package(SWEETALEART, REACT HOOK FORM, REACT ICONS)__
+// Package(SWEET ALEART, REACT HOOK FORM, REACT ICONS, REACT ROUTER)__
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { TiHomeOutline } from "react-icons/ti";
@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router";
 
 // From react__
 import { use, useState } from "react";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
 const SignIn = () => {
   const { handleLoginUser, loading } = use(AuthContext);
@@ -54,6 +55,7 @@ const SignIn = () => {
 
   return (
     <>
+      <ScrollToTop></ScrollToTop>
       <section id="signin_section">
         <div className="main_auth_container">
           <div className="auth_from_parent_container">

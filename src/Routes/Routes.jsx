@@ -4,11 +4,15 @@ import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Payment from "../Layouts/Components/Payment/Payment";
 import AboutUs from "../Layouts/Pages/Global/AboutUs/AboutUs";
 import Profile from "../Layouts/Pages/Global/Profile/Profile";
+import LoginVerify from "../VerifyUser/LoginVerify/LoginVerify";
+import AdminVerify from "../VerifyUser/AdminVerify/AdminVerify";
+import GuideVerify from "../VerifyUser/GuideVerify/GuideVerify";
 import ErrorPage from "../Layouts/Components/ErrorPage/ErrorPage";
 import SignIn from "../Layouts/Pages/Authentication/SignIn/SignIn";
 import SignUp from "../Layouts/Pages/Authentication/SignUp/SignUp";
 import Community from "../Layouts/Pages/Global/Community/Community";
 import MyBooking from "../Layouts/Pages/Tourist/MyBooking/MyBooking";
+import TouristVerify from "../VerifyUser/TouristVerify/TouristVerify";
 import ManageUser from "../Layouts/Pages/Admin/ManageUser/ManageUser";
 import AddPackage from "../Layouts/Pages/Admin/AddPackage/AddPackage";
 import Candidates from "../Layouts/Pages/Admin/Candidates/Candidates";
@@ -16,21 +20,17 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import GuideBooking from "../Layouts/Pages/Guide/GuideBooking/GuideBooking";
 import ManageProfile from "../Layouts/Pages/Admin/ManageProfile/ManageProfile";
 import PackageDetails from "../Layouts/Components/PackageDetails/PackageDetails";
+import RequestToGuide from "../Layouts/Pages/Tourist/RequestToGuide/RequestToGuide";
 import GuideAddStories from "../Layouts/Pages/Guide/GuideAddStories/GuideAddStories";
+import GuideManageStory from "../Layouts/Pages/Guide/GuideManageStory/GuideManageStory";
 import HomePageLayout from "../Layouts/Pages/Global/HomePage/HomePageLayout/HomePageLayout";
 import TouristAddStories from "../Layouts/Pages/Tourist/TouristAddStories/TouristAddStories";
 import GuideManageProfile from "../Layouts/Pages/Guide/GuideManageProfile/GuideManageProfile";
+import TouristManageStory from "../Layouts/Pages/Tourist/TouristManageStory/TouristManageStory";
 import TouristManageProfile from "../Layouts/Pages/Tourist/TouristManageProfile/TouristManageProfile";
 
 // Package(REACT-ROUTER-DOM)__
 import { createBrowserRouter } from "react-router";
-import TouristManageStory from "../Layouts/Pages/Tourist/TouristManageStory/TouristManageStory";
-import GuideManageStory from "../Layouts/Pages/Guide/GuideManageStory/GuideManageStory";
-import RequestToGuide from "../Layouts/Pages/Tourist/RequestToGuide/RequestToGuide";
-import AdminVerify from "../VerifyUser/AdminVerify/AdminVerify";
-import GuideVerify from "../VerifyUser/GuideVerify/GuideVerify";
-import TouristVerify from "../VerifyUser/TouristVerify/TouristVerify";
-import LoginVerify from "../VerifyUser/LoginVerify/LoginVerify";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +66,9 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`https://globe-trek-server-phi.vercel.app/get-package-details/${params.id}`),
+          fetch(
+            `https://globe-trek-server-phi.vercel.app/get-package-details/${params.id}`
+          ),
       },
       {
         path: "/profile/:id",
@@ -76,7 +78,9 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`https://globe-trek-server-phi.vercel.app/get-profile-data/${params.id}`),
+          fetch(
+            `https://globe-trek-server-phi.vercel.app/get-profile-data/${params.id}`
+          ),
       },
       {
         path: "/sign-in",
@@ -94,7 +98,9 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`https://globe-trek-server-phi.vercel.app/package-price/${params.id}`),
+          fetch(
+            `https://globe-trek-server-phi.vercel.app/package-price/${params.id}`
+          ),
       },
     ],
   },

@@ -1,6 +1,7 @@
 // File path__
 import "./Candidates.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import ScrollToTop from "../../../Components/ScrollToTop/ScrollToTop";
 
 // Package(SWEET ALERT)__
 import Swal from "sweetalert2";
@@ -88,96 +89,101 @@ const Candidates = () => {
   };
 
   return (
-    <div className="manage-candidates">
-      <h2>Manage Candidates</h2>
-      <table className="candidates-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Current Role</th>
-            <th>Requested Role</th>
-            <th>Actions</th>
-            <th>Message</th>
-          </tr>
-        </thead>
+    <>
+      <ScrollToTop></ScrollToTop>
+      <div className="manage-candidates">
+        <h2>Manage Candidates</h2>
+        <table className="candidates-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Current Role</th>
+              <th>Requested Role</th>
+              <th>Actions</th>
+              <th>Message</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {requestLoading ? (
-            "Data is loading..."
-          ) : requestData.length === 0 ? (
-            "No request available"
-          ) : (
-            <>
-              {requestData.map((data) => (
-                <tr key={data._id}>
-                  <td>{data.applierName}</td>
+          <tbody>
+            {requestLoading ? (
+              "Data is loading..."
+            ) : requestData.length === 0 ? (
+              "No request available"
+            ) : (
+              <>
+                {requestData.map((data) => (
+                  <tr key={data._id}>
+                    <td>{data.applierName}</td>
 
-                  <td>{data.applierEmail}</td>
+                    <td>{data.applierEmail}</td>
 
-                  <td>{data.currentRole}</td>
+                    <td>{data.currentRole}</td>
 
-                  <td>Guide</td>
+                    <td>Guide</td>
 
-                  <td>
-                    <button
-                      onClick={() => handleAccept(data.applierEmail, data._id)}
-                      className="accept"
-                    >
-                      Accept
-                    </button>
-                    <button
-                      onClick={() => handleReject(data._id)}
-                      className="reject"
-                    >
-                      Reject
-                    </button>
-                  </td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          handleAccept(data.applierEmail, data._id)
+                        }
+                        className="accept"
+                      >
+                        Accept
+                      </button>
+                      <button
+                        onClick={() => handleReject(data._id)}
+                        className="reject"
+                      >
+                        Reject
+                      </button>
+                    </td>
 
-                  <td>
-                    <button
-                      onClick={() =>
-                        document.getElementById("request_modal").showModal()
-                      }
-                      className="details"
-                    >
-                      Details
-                    </button>
-                  </td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          document.getElementById("request_modal").showModal()
+                        }
+                        className="details"
+                      >
+                        Details
+                      </button>
+                    </td>
 
-                  {/* Request modal__ST */}
+                    {/* Request modal__ST */}
 
-                  <dialog id="request_modal" className="modal">
-                    <div className="modal-box max-w-2xl bg-white p-6 rounded-lg shadow-lg border border-blue-200">
-                      <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute left-[880px] top-1 text-gray-500 hover:text-red-500">
-                          ✕
-                        </button>
-                      </form>
+                    <dialog id="request_modal" className="modal">
+                      <div className="modal-box max-w-2xl bg-white p-6 rounded-lg shadow-lg border border-blue-200">
+                        <form method="dialog">
+                          <button className="btn btn-sm btn-circle btn-ghost absolute left-[880px] top-1 text-gray-500 hover:text-red-500">
+                            ✕
+                          </button>
+                        </form>
 
-                      <h3 className="text-xl font-semibold text-[#2a75b3] mb-4">
-                        {data.requestTitle}
-                      </h3>
+                        <h3 className="text-xl font-semibold text-[#2a75b3] mb-4">
+                          {data.requestTitle}
+                        </h3>
 
-                      <div className="space-y-3 text-gray-700 leading-relaxed">
-                        {data.reasonForRequest}
+                        <div className="space-y-3 text-gray-700 leading-relaxed">
+                          {data.reasonForRequest}
+                        </div>
+
+                        <div className="mt-6 text-right text-sm text-gray-500">
+                          Submitted on:{" "}
+                          <span className="font-medium">{data.createdAt}</span>
+                        </div>
                       </div>
+                    </dialog>
 
-                      <div className="mt-6 text-right text-sm text-gray-500">
-                        Submitted on:{" "}
-                        <span className="font-medium">{data.createdAt}</span>
-                      </div>
-                    </div>
-                  </dialog>
-
-                  {/* Request modal__END */}
-                </tr>
-              ))}
-            </>
-          )}
-        </tbody>
-      </table>
-    </div>
+                    {/* Request modal__END */}
+                  </tr>
+                ))}
+              </>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
