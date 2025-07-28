@@ -1,52 +1,40 @@
+import { useContext, useEffect, useState, useCallback } from "react";
 import useAxiosPublic from "./useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useContext, useEffect, useState } from "react";
 
 const useUserData = () => {
   const axiosPublic = useAxiosPublic();
   const { user, userLoading } = useContext(AuthContext);
+
   const [currentUserData, setCurrentUserData] = useState(null);
   const [userDataLoading, setUserDataLoading] = useState(true);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const handleCurrentUserData = async () => {
-      if (!userLoading) {
-        if (user?.email) {
-          setUserDataLoading(true);
-
-          try {
-            const res = await axiosPublic.get(
-              `/current-user-data/${user.email}`
-            );
-
-            if (isMounted) {
-              setCurrentUserData(res.data);
-            }
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-            if (isMounted) setCurrentUserData(null);
-          } finally {
-            if (isMounted) setUserDataLoading(false);
-          }
-        } else {
-          if (isMounted) {
-            setCurrentUserData(null);
-            setUserDataLoading(false);
-          }
-        }
+  const refetchUserData = useCallback(async () => {
+    if (user?.email) {
+      setUserDataLoading(true);
+      try {
+        const res = await axiosPublic.get(`/current-user-data/${user.email}`);
+        setCurrentUserData(res.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setCurrentUserData(null);
+      } finally {
+        setUserDataLoading(false);
       }
-    };
+    }
+  }, [user, axiosPublic]);
 
-    handleCurrentUserData();
+  // Initial fetch__
+  useEffect(() => {
+    if (!userLoading && user?.email) {
+      refetchUserData();
+    } else if (!userLoading && !user?.email) {
+      setCurrentUserData(null);
+      setUserDataLoading(false);
+    }
+  }, [user, userLoading, refetchUserData]);
 
-    return () => {
-      isMounted = false;
-    };
-  }, [user, axiosPublic, userLoading]);
-
-  return { currentUserData, userDataLoading };
+  return { currentUserData, userDataLoading, refetchUserData };
 };
 
 export default useUserData;

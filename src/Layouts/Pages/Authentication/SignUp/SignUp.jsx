@@ -36,6 +36,7 @@ const SignUp = () => {
       userPhoto: photo,
       userEmail: email,
       userRole: role,
+      status: "Normal"
     };
 
     handleCreateUser(email, password)

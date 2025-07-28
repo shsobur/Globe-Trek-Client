@@ -88,12 +88,14 @@ const Package = () => {
                             <img src={item.images[0]} alt="Card Image" />
                           </div>
                           <div className="package_card_info_container">
-                            <h3>Beach & Relaxation</h3>
+                            <h3>{item.tourType}</h3>
                             <h2>{item.title}</h2>
                             <p>{item.duration}</p>
                             <span>${item.price}</span>
                             <Link to={`/package-details/${item._id}`}>
-                              <button>View Details</button>
+                              <button className="btn btn-primary">
+                                View Details
+                              </button>
                             </Link>
                           </div>
                         </div>
@@ -120,7 +122,11 @@ const Package = () => {
                           <span>
                             {guide.userAddress || "2 Years Experience"}
                           </span>
-                          <button>Details</button>
+                          <Link to={`/profile/${guide._id}`}>
+                            <button className="btn btn-primary">
+                              View profile
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     ))}
