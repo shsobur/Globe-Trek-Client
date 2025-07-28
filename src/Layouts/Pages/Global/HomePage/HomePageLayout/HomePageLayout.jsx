@@ -8,6 +8,8 @@ import DiscoverGlobeTaek from "../DiscoverGlobeTaek/DiscoverGlobeTaek";
 import LetAdventureBegin from "../LetAdventureBegin/LetAdventureBegin";
 import ScrollToTop from "../../../../Components/ScrollToTop/ScrollToTop";
 import UserDataLoading from "../../../../Components/UserDataLoading/UserDataLoading";
+
+// From react__
 import { useEffect } from "react";
 
 const HomePageLayout = () => {
