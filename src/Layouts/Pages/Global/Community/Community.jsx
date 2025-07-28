@@ -40,7 +40,7 @@ const Community = () => {
 
   const handleLikeCount = async (value, idx, id) => {
     if (!user) {
-      navigate("sign-in");
+      navigate("/sign-in");
 
       Swal.fire({
         icon: "error",

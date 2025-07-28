@@ -6,7 +6,8 @@ import image3 from "../../../../../assets/banner-image/image-3.jpg";
 import image4 from "../../../../../assets/banner-image/image-4.jpg";
 import image5 from "../../../../../assets/banner-image/image-5.jpg";
 
-// Package(REACT-CAROUSEL)__
+// Package(REACT-CAROUSEL, REACT ROUTER)__
+import { Link } from "react-router";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -52,7 +53,9 @@ const Banner = () => {
           >
             <h1>Discover Amazing Places</h1>
             <p>Your journey to extraordinary adventures begins here</p>
-            <button>START YOU ADVENTURE</button>
+            <Link to={"/trips"}>
+              <button>START YOU ADVENTURE</button>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,14 +1,19 @@
+// File path__
 import "./Stories.css";
-import { useContext, useEffect, useState } from "react";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
-import Swal from "sweetalert2";
 import useUserData from "../../../../Hooks/useUserData";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
-import { useNavigate } from "react-router";
+
+// Package(SWEET ALERT, REACT ROUTER)__
+import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router";
+
+// From react__
+import { useContext, useEffect, useState } from "react";
 
 const Stories = () => {
-  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const { currentUserData } = useUserData();
   const { user } = useContext(AuthContext);
   const [stories, setStories] = useState([]);
@@ -33,7 +38,7 @@ const Stories = () => {
 
   const handleLikeCount = async (value, idx, id) => {
     if (!user) {
-      navigate("sign-in");
+      navigate("/sign-in");
 
       Swal.fire({
         icon: "error",
@@ -164,7 +169,9 @@ const Stories = () => {
           </div>
 
           <div className="w-full mt-10 flex justify-center">
-            <button className="btn btn-primary">View more</button>
+            <Link to={"/community"}>
+              <button className="btn btn-primary">View more</button>
+            </Link>
           </div>
         </div>
       </section>

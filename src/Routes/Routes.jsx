@@ -66,7 +66,7 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/get-package-details/${params.id}`),
+          fetch(`https://globe-trek-server-phi.vercel.app/get-package-details/${params.id}`),
       },
       {
         path: "/profile/:id",
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/get-profile-data/${params.id}`),
+          fetch(`https://globe-trek-server-phi.vercel.app/get-profile-data/${params.id}`),
       },
       {
         path: "/sign-in",
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
           </LoginVerify>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/package-price/${params.id}`),
+          fetch(`https://globe-trek-server-phi.vercel.app/package-price/${params.id}`),
       },
     ],
   },
