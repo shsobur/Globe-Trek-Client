@@ -148,12 +148,18 @@ const Navbar = () => {
             </ul>
 
             <div className="dropdown_wrapper" ref={menuRef}>
-              <button
-                className="dropdown_button"
-                onClick={() => setOpen(!open)}
-              >
-                <HiMiniUserCircle />
-              </button>
+              {user ? (
+                <button
+                  className="dropdown_button"
+                  onClick={() => setOpen(!open)}
+                >
+                  <HiMiniUserCircle />{" "}
+                </button>
+              ) : (
+                <Link to="/sign-in">
+                  <button className="btn btn-primary">Sign In</button>
+                </Link>
+              )}
 
               <div
                 id="dropdown_item_parent_container"
@@ -202,19 +208,10 @@ const Navbar = () => {
                   </NavLink>
                 )}
 
-                {user ? (
+                {user && (
                   <span onClick={handleSignOut} className="dropdown_item">
                     <PiSignIn /> Sign Out
                   </span>
-                ) : (
-                  <Link to="/sign-in">
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <PiSignIn /> Sign In
-                    </span>
-                  </Link>
                 )}
               </div>
             </div>
