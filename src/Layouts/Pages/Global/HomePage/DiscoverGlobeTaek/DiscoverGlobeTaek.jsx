@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaShieldAlt,
   FaMapMarkedAlt,
@@ -37,13 +36,14 @@ const DiscoverGlobeTaek = () => {
         background: "linear-gradient(135deg, #d1edff77, #f7faff)",
       }}
     >
-      <div className="max-w-[1536px] max-h-[100vh] mx-auto w-full">
+      <div className="max-w-[1536px] main-h-[100vh] mx-auto w-full">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
           {/* Text Content - Left Side */}
           <div
             className="w-full lg:w-1/2"
             data-aos="fade-right"
             data-aos-duration="1000"
+            data-aos-once="true"
           >
             <div className="text-center lg:text-left">
               {/* Badge */}
@@ -55,8 +55,9 @@ const DiscoverGlobeTaek = () => {
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2a75b3] mb-6 leading-tight">
-                Why Choose <span className="text-[#0d4776]">GlobeTaek?</span>
+              <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2a75b3] mb-6 leading-tight">
+                Why Choose{" "}
+                <span className="font-playfair text-[#0d4776]">GlobeTaek?</span>
               </h2>
 
               {/* Main Description */}
@@ -75,6 +76,7 @@ const DiscoverGlobeTaek = () => {
                     className="flex items-center gap-4 bg-white/60 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-blue-50 hover:shadow-md transition-all duration-300"
                     data-aos="fade-up"
                     data-aos-delay={index * 200}
+                    data-aos-once="true"
                   >
                     <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-[#87ceeb] to-[#2a75b3] rounded-full flex items-center justify-center">
                       <feature.icon className="text-white text-lg" />
@@ -96,6 +98,7 @@ const DiscoverGlobeTaek = () => {
                 className="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0"
                 data-aos="fade-up"
                 data-aos-delay="600"
+                data-aos-once="true"
               >
                 <div className="text-center">
                   <div className="text-2xl md:text-3xl font-bold text-[#2a75b3]">
@@ -124,6 +127,7 @@ const DiscoverGlobeTaek = () => {
             className="w-full lg:w-1/2"
             data-aos="fade-left"
             data-aos-duration="1200"
+            data-aos-once="true"
           >
             <div className="relative">
               {/* Main Image Container */}

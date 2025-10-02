@@ -1,4 +1,3 @@
-import React from "react";
 import { FaHiking, FaCompass, FaMapMarkedAlt, FaRoute } from "react-icons/fa";
 
 const LetAdventureBegin = () => {
@@ -15,8 +14,9 @@ const LetAdventureBegin = () => {
           className="mb-16 md:mb-20"
           data-aos="fade-up"
           data-aos-duration="1000"
+          data-aos-once="true"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2a75b3] mb-4">
+          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2a75b3] mb-4">
             Let the Adventure Begin!
           </h2>
           <p className="text-xl sm:text-2xl text-gray-600 mb-8">
@@ -36,6 +36,7 @@ const LetAdventureBegin = () => {
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16 md:mb-20"
           data-aos="fade-up"
           data-aos-duration="1200"
+          data-aos-once="true"
         >
           {/* Happy Tourists */}
           <div className="group bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-blue-200 transform hover:-translate-y-2">
@@ -87,6 +88,7 @@ const LetAdventureBegin = () => {
           className="max-w-2xl mx-auto"
           data-aos="fade-up"
           data-aos-duration="1400"
+          data-aos-once="true"
         >
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-blue-100">
             <blockquote className="text-lg md:text-xl text-gray-700 italic mb-4">

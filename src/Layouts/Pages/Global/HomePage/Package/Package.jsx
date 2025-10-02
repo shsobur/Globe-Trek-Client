@@ -62,9 +62,11 @@ const Package = () => {
             className="text-center mb-12 md:mb-16 lg:mb-20"
             data-aos="fade-up"
             data-aos-duration="1000"
+            data-aos-once="true"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
-              Tourism & <span className="text-[#87ceeb]">Travel Guide</span>
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
+              Tourism &{" "}
+              <span className="font-playfair text-[#87ceeb]">Travel Guide</span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] mx-auto rounded-full"></div>
           </div>
@@ -74,6 +76,7 @@ const Package = () => {
             className="flex justify-center mb-12 md:mb-16"
             data-aos="fade-up"
             data-aos-duration="1200"
+            data-aos-once="true"
           >
             <div className="flex flex-wrap justify-center gap-4 md:gap-8 bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg border border-blue-100">
               {tabs.map((btn, index) => (
@@ -97,6 +100,7 @@ const Package = () => {
             className="max-w-6xl mx-auto"
             data-aos="fade-up"
             data-aos-duration="1400"
+            data-aos-once="true"
           >
             {tabActive === 0 && (
               <div>

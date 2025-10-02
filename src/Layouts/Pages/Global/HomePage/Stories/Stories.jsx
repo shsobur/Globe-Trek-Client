@@ -126,15 +126,17 @@ const Stories = () => {
         id="stories_section"
         className="bg-[#f8fbff] py-12 md:py-20 lg:py-24"
       >
-        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1536px] min-h-[100vh] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <div
             className="text-center mb-12 md:mb-16 lg:mb-20"
             data-aos="fade-up"
             data-aos-duration="1000"
+            data-aos-once="true"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
-              Tourist <span className="text-[#87ceeb]">Stories</span>
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
+              Tourist{" "}
+              <span className="font-playfair text-[#87ceeb]">Stories</span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] mx-auto rounded-full"></div>
             <p className="text-lg sm:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
@@ -144,7 +146,7 @@ const Stories = () => {
           </div>
 
           {/* Stories Grid */}
-          <div data-aos="fade-up" data-aos-duration="1200">
+          <div data-aos="fade-up" data-aos-duration="1200" data-aos-once="true">
             {storiesLoading ? (
               <div className="flex flex-col items-center justify-center py-20">
                 <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#0060af] mb-4"></div>
@@ -341,6 +343,7 @@ const Stories = () => {
               className="text-center mt-12 md:mt-16"
               data-aos="fade-up"
               data-aos-duration="1400"
+              data-aos-once="true"
             >
               <Link to={"/community"}>
                 <button className="bg-gradient-to-r from-[#0060af] to-[#87ceeb] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-2">

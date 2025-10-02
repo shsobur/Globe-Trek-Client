@@ -8,9 +8,13 @@ const Overview = () => {
             className="text-center mb-16 md:mb-24 lg:mb-28"
             data-aos="fade-up"
             data-aos-duration="1000"
+            data-aos-once="true"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
-              About <span className="text-[#87ceeb]">Wanderlust Tours</span>
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2c5282] mb-4">
+              About{" "}
+              <span className="font-playfair text-[#87ceeb]">
+                Wanderlust Tours
+              </span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] mx-auto rounded-full"></div>
           </div>
@@ -23,6 +27,7 @@ const Overview = () => {
               data-aos="fade-right"
               data-aos-easing="linear"
               data-aos-duration="1500"
+              data-aos-once="true"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-[#e2f4ff]">
                 <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-[#e0f4ff] to-[#f0f9ff]">
@@ -40,11 +45,12 @@ const Overview = () => {
             </div>
 
             {/* Content Section - Right */}
-            <div className="w-full lg:w-1/2">
+            <div className=" w-full lg:w-1/2">
               <div
                 className="space-y-6 md:space-y-8"
                 data-aos="fade-left"
                 data-aos-duration="1200"
+                data-aos-once="true"
               >
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2c5282] leading-tight">
                   Your Gateway to{" "}
@@ -63,6 +69,7 @@ const Overview = () => {
                   className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 pt-4"
                   data-aos="fade-up"
                   data-aos-duration="1400"
+                  data-aos-once="true"
                 >
                   {/* Happy Travelers */}
                   <div className="group text-center p-6 bg-white rounded-2xl border border-[#e2f4ff] hover:border-[#87ceeb] transition-all duration-500 hover:scale-105 cursor-pointer shadow-sm hover:shadow-[0_10px_30px_rgba(135,206,235,0.15)]">

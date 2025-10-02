@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaPaperPlane,
   FaEnvelope,
@@ -23,6 +22,7 @@ const Newsletter = () => {
             className="w-full lg:w-1/2"
             data-aos="fade-right"
             data-aos-duration="1000"
+            data-aos-once="true"
           >
             {/* Main Illustration/Image Area */}
             <div className="relative">
@@ -100,12 +100,14 @@ const Newsletter = () => {
             className="w-full lg:w-1/2"
             data-aos="fade-left"
             data-aos-duration="1200"
+            data-aos-once="true"
           >
             <div className="text-center lg:text-left">
               {/* Header */}
               <div className="mb-8">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2a75b3] mb-4">
-                  Stay <span className="text-[#87ceeb]">Inspired</span>
+                <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2a75b3] mb-4">
+                  Stay{" "}
+                  <span className="font-playfair text-[#87ceeb]">Inspired</span>
                 </h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] rounded-full mb-6 lg:mx-0 mx-auto"></div>
                 <p className="text-xl text-gray-600 leading-relaxed">
@@ -207,11 +209,7 @@ const Newsletter = () => {
               </div>
 
               {/* Stats */}
-              <div
-                className="grid grid-cols-3 gap-6 mt-8"
-                data-aos="fade-up"
-                data-aos-duration="1400"
-              >
+              <div className="grid grid-cols-3 gap-6 mt-8">
                 <div className="text-center">
                   <div className="text-2xl md:text-3xl font-bold text-[#2a75b3]">
                     2.5K+
