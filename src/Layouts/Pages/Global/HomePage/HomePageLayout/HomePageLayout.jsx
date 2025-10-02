@@ -18,7 +18,7 @@ const HomePageLayout = () => {
   return (
     <>
       <ScrollToTop></ScrollToTop>
-      {userDataLoading && <UserDataLoading></UserDataLoading>}
+      {/* {userDataLoading && <UserDataLoading></UserDataLoading>} */}
       <Banner></Banner>
       <Overview></Overview>
       <LetAdventureBegin></LetAdventureBegin>
