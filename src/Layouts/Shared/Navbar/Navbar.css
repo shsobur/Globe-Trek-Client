@@ -28,7 +28,7 @@ nav {
 }
 
 .navbar_content_container {
-  width: 1526px;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: space-between;

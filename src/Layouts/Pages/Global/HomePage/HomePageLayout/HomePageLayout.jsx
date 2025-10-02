@@ -3,6 +3,7 @@ import Banner from "../Banner/Banner";
 import Package from "../Package/Package";
 import Stories from "../Stories/Stories";
 import Overview from "../Overview/Overview";
+import Newsletter from "../Newsletter/Newsletter";
 import useUserData from "../../../../Hooks/useUserData";
 import DiscoverGlobeTaek from "../DiscoverGlobeTaek/DiscoverGlobeTaek";
 import LetAdventureBegin from "../LetAdventureBegin/LetAdventureBegin";
@@ -10,14 +11,9 @@ import ScrollToTop from "../../../../Components/ScrollToTop/ScrollToTop";
 import UserDataLoading from "../../../../Components/UserDataLoading/UserDataLoading";
 
 // From react__
-import { useEffect } from "react";
 
 const HomePageLayout = () => {
-  const { userDataLoading, refetchUserData } = useUserData();
-
-  useEffect(() => {
-    refetchUserData();
-  }, [refetchUserData]);
+  const { userDataLoading } = useUserData();
 
   return (
     <>
@@ -29,6 +25,7 @@ const HomePageLayout = () => {
       <Package></Package>
       <DiscoverGlobeTaek></DiscoverGlobeTaek>
       <Stories></Stories>
+      <Newsletter></Newsletter>
     </>
   );
 };
