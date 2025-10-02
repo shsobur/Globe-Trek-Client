@@ -1,66 +1,56 @@
-.adventure_section {
-  height: 100vh;
-  max-width: 1920px;
-  background: linear-gradient(135deg, #d1edff77, #f7faff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.adventure_container {
-  width: 100%;
-  max-width: 1200px;
-}
-
-.adventure_container h2 {
-  font-size: 48px;
-  color: #2a75b3;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.adventure_container p {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 40px;
-}
-
-.fun_facts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.fact_card {
+/* Custom styles for enhanced components */
+.fact-card {
   background-color: white;
   border-radius: 20px;
+  padding: 2rem 1.5rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  width: 200px;
-  padding: 30px 20px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  border: 2px solid transparent;
 }
 
-.fact_card:hover {
-  transform: scale(1.05) rotate(-1deg);
+.fact-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(42, 117, 179, 0.15);
+  border-color: #87ceeb;
 }
 
-.fact_card span {
-  font-size: 40px;
-  display: block;
-  margin-bottom: 10px;
+.icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
-.fact_card h3 {
-  font-size: 28px;
-  color: #2a75b3;
+.adventure-type-card {
+  background: white;
+  padding: 1.5rem 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.fact_card p {
-  color: #555;
-  margin-top: 5px;
-  font-size: 16px;
+.adventure-type-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(42, 117, 179, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .fact-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .icon-wrapper {
+    width: 50px;
+    height: 50px;
+  }
 }
