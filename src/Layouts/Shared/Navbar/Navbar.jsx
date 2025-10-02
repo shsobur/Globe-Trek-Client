@@ -1,47 +1,32 @@
 // File path__
 import "./Navbar.css";
+import React, { useState, useEffect, useRef } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-
-// Imported package__
 import Swal from "sweetalert2";
 import { Link, NavLink } from "react-router";
-
-// React icons__
-import { RxCross1 } from "react-icons/rx";
-import { PiSignIn } from "react-icons/pi";
-import { IoIosMenu } from "react-icons/io";
-import { IoHomeOutline } from "react-icons/io5";
-import { FiMessageCircle } from "react-icons/fi";
-import { HiMiniUserCircle } from "react-icons/hi2";
-import { AiOutlineShopping } from "react-icons/ai";
-import { RiContactsBook2Line } from "react-icons/ri";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
-
-// From react__
-import { use, useEffect, useRef, useState } from "react";
+import {
+  FaUserCircle,
+  FaSignOutAlt,
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUsers,
+  FaMapMarkedAlt,
+  FaInfoCircle,
+} from "react-icons/fa";
+import { LuLayoutDashboard } from "react-icons/lu";
 import useUserData from "../../Hooks/useUserData";
 
 const Navbar = () => {
   const menuRef = useRef();
-  const { user, logOut } = use(AuthContext);
+  const { user, logOut } = React.useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [isScrollingDown, setIsScrollingDown] = useState(null);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { currentUserData } = useUserData();
   const userRole = currentUserData?.userRole;
 
-  // Handle Close Dropdown__
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Handle Scrolling__
+  // Handle scroll behavior
   useEffect(() => {
     let lastScrollTop =
       window.pageYOffset || document.documentElement.scrollTop;
@@ -50,9 +35,9 @@ const Navbar = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > lastScrollTop) {
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
         setIsScrollingDown(true);
-      } else if (scrollTop < lastScrollTop) {
+      } else {
         setIsScrollingDown(false);
       }
 
@@ -63,20 +48,31 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle Stop Scroll__
+  // Handle click outside dropdown
   useEffect(() => {
-    if (!menuOpen) {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Handle body scroll lock for mobile menu
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
       document.body.style.overflow = "auto";
-      return;
     }
-    document.body.style.overflow = "hidden";
   }, [menuOpen]);
 
-  // Sign Out__
+  // Sign Out function
   const handleSignOut = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You went to sign out!",
+      text: "You want to sign out!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#f70000",
@@ -93,101 +89,114 @@ const Navbar = () => {
         });
       }
     });
-    setOpen(!open);
+    setOpen(false);
   };
 
   return (
-    <>
-      <nav>
-        {/* Desktop layout__ */}
-        <div
-          id={isScrollingDown ? "navbar_close" : "navbar_open"}
-          className="main_navbar_container"
-        >
-          <div className="navbar_content_container">
-            <h1 className="navbar_logo">GlobeTrek</h1>
+    <nav
+      className={`navbar ${
+        isScrollingDown ? "navbar--hidden" : "navbar--visible"
+      }`}
+    >
+      <div className="navbar__container">
+        {/* Logo */}
+        <div className="navbar__logo">
+          <Link to="/" className="navbar__logo-link">
+            <span className="navbar__logo-text">GlobeTaek</span>
+          </Link>
+        </div>
 
-            <ul className="navbar_routes_container">
+        {/* Desktop Navigation */}
+        <div className="navbar__desktop">
+          <ul className="navbar__menu">
+            <li className="navbar__item">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "route_active_style" : "router_none_active_style"
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
                 }
               >
-                <li>Home</li>
+                <FaHome className="navbar__icon" />
+                Home
               </NavLink>
+            </li>
 
+            <li className="navbar__item">
               <NavLink
                 to="/community"
                 className={({ isActive }) =>
-                  isActive ? "route_active_style" : "router_none_active_style"
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
                 }
               >
-                <li>Community</li>
+                <FaUsers className="navbar__icon" />
+                Community
               </NavLink>
+            </li>
 
-              {user && (
+            {user && (
+              <li className="navbar__item">
                 <NavLink
                   to="/trips"
                   className={({ isActive }) =>
-                    isActive ? "route_active_style" : "router_none_active_style"
+                    `navbar__link ${isActive ? "navbar__link--active" : ""}`
                   }
                 >
-                  <li>Trips</li>
+                  <FaMapMarkedAlt className="navbar__icon" />
+                  Trips
                 </NavLink>
-              )}
+              </li>
+            )}
 
+            <li className="navbar__item">
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  isActive ? "route_active_style" : "router_none_active_style"
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
                 }
               >
-                <li>About Us</li>
+                <FaInfoCircle className="navbar__icon" />
+                About Us
               </NavLink>
-            </ul>
+            </li>
+          </ul>
 
-            <div className="dropdown_wrapper" ref={menuRef}>
-              {user ? (
+          {/* User Dropdown */}
+          <div className="navbar__user" ref={menuRef}>
+            {user ? (
+              <>
                 <button
-                  className="dropdown_button"
+                  className="navbar__user-btn"
                   onClick={() => setOpen(!open)}
                 >
-                  <HiMiniUserCircle />{" "}
+                  <FaUserCircle className="navbar__user-icon" />
+                  <span className="navbar__user-name">
+                    {currentUserData?.userName || "User"}
+                  </span>
                 </button>
-              ) : (
-                <Link to="/sign-in">
-                  <button className="btn btn-primary">Sign In</button>
-                </Link>
-              )}
 
-              <div
-                id="dropdown_item_parent_container"
-                className={`dropdown_menu ${open ? "open" : ""}`}
-              >
-                {user && (
-                  <h2 className="text-lg pl-5 font-semibold">
-                    Hi, {currentUserData?.userName} Welcome back
-                    <span className="font-light text-gray-400">
-                      {" "}
-                      ({userRole})
-                    </span>
-                  </h2>
-                )}
+                <div
+                  className={`navbar__dropdown ${
+                    open ? "navbar__dropdown--open" : ""
+                  }`}
+                >
+                  <div className="navbar__dropdown-header">
+                    <p className="navbar__dropdown-welcome">
+                      Welcome back, <strong>{currentUserData?.userName}</strong>
+                    </p>
+                    <span className="navbar__dropdown-role">({userRole})</span>
+                  </div>
 
-                {user && (
-                  <NavLink to={`/profile/${currentUserData?._id}`}>
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <MdOutlineSpaceDashboard />
-                      Profile
-                    </span>
+                  <div className="navbar__dropdown-divider"></div>
+
+                  <NavLink
+                    to={`/profile/${currentUserData?._id}`}
+                    className="navbar__dropdown-item"
+                    onClick={() => setOpen(false)}
+                  >
+                    <FaUserCircle className="navbar__dropdown-icon" />
+                    Profile
                   </NavLink>
-                )}
 
-                {user && (
                   <NavLink
                     to={
                       (userRole === "Admin" &&
@@ -195,157 +204,199 @@ const Navbar = () => {
                       (userRole === "Tour Guide" &&
                         "/dashboard/guide-manage-profile") ||
                       (userRole === "Tourist" &&
-                        "/dashboard/tourist-manage-profile")
+                        "/dashboard/tourist-manage-profile") ||
+                      "/dashboard"
                     }
+                    className="navbar__dropdown-item"
+                    onClick={() => setOpen(false)}
                   >
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <MdOutlineSpaceDashboard />
-                      Dashboard
-                    </span>
+                    <LuLayoutDashboard className="navbar__dropdown-icon" />
+                    Dashboard
                   </NavLink>
-                )}
 
-                {user && (
-                  <span onClick={handleSignOut} className="dropdown_item">
-                    <PiSignIn /> Sign Out
-                  </span>
-                )}
-              </div>
-            </div>
+                  <div className="navbar__dropdown-divider"></div>
 
-            <div className="mobile_menu_container">
-              <span onClick={() => setMenuOpen(!menuOpen)}>
-                {menuOpen ? <RxCross1 /> : <IoIosMenu />}
-              </span>
-            </div>
-          </div>
-
-          {/* Mobile layout__ */}
-          <div
-            id={menuOpen ? "" : "menu_close"}
-            className="main_mobile_menu_container"
-          >
-            <div className="mobile_menu_routes">
-              <ul>
-                <li onClick={() => setMenuOpen(!menuOpen)}>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "mobile_menu_active_style"
-                        : "mobile_menu_non_active_style"
-                    }
+                  <button
+                    className="navbar__dropdown-item navbar__dropdown-item--signout"
+                    onClick={handleSignOut}
                   >
-                    <IoHomeOutline /> Home
-                  </NavLink>
-                </li>
-
-                <li onClick={() => setMenuOpen(!menuOpen)}>
-                  <NavLink
-                    to="/community"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "mobile_menu_active_style"
-                        : "mobile_menu_non_active_style"
-                    }
-                  >
-                    <AiOutlineShopping /> Community
-                  </NavLink>
-                </li>
-
-                <li onClick={() => setMenuOpen(!menuOpen)}>
-                  <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "mobile_menu_active_style"
-                        : "mobile_menu_non_active_style"
-                    }
-                  >
-                    <FiMessageCircle /> About Us
-                  </NavLink>
-                </li>
-
-                <li onClick={() => setMenuOpen(!menuOpen)}>
-                  <NavLink
-                    to="/contact"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "mobile_menu_active_style"
-                        : "mobile_menu_non_active_style"
-                    }
-                  >
-                    <RiContactsBook2Line /> _Contact
-                  </NavLink>
-                </li>
-
-                <li onClick={() => setMenuOpen(!menuOpen)}>
-                  <NavLink
-                    to="/trips"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "mobile_menu_active_style"
-                        : "mobile_menu_non_active_style"
-                    }
-                  >
-                    <RiContactsBook2Line /> Trips
-                  </NavLink>
-                </li>
-              </ul>
-
-              <div className="others_routes_container">
-                <ul>
-                  <li onClick={() => setMenuOpen(!menuOpen)}>
-                    <NavLink
-                      to="/dashboard"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "mobile_menu_active_style"
-                          : "mobile_menu_non_active_style"
-                      }
-                    >
-                      <MdOutlineSpaceDashboard /> Dashboard
-                    </NavLink>
-                  </li>
-
-                  {user ? (
-                    <li onClick={handleSignOut}>
-                      <NavLink
-                        className={({ isActive }) =>
-                          isActive
-                            ? "mobile_menu_active_style"
-                            : "mobile_menu_non_active_style"
-                        }
-                      >
-                        <PiSignIn />
-                        Sign Out
-                      </NavLink>
-                    </li>
-                  ) : (
-                    <li onClick={() => setMenuOpen(!menuOpen)}>
-                      <NavLink
-                        to="/sign-in"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "mobile_menu_active_style"
-                            : "mobile_menu_non_active_style"
-                        }
-                      >
-                        <PiSignIn />
-                        Sign In
-                      </NavLink>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
+                    <FaSignOutAlt className="navbar__dropdown-icon" />
+                    Sign Out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link to="/sign-in" className="navbar__signin-btn">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
-      </nav>
-    </>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="navbar__mobile-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`navbar__mobile-overlay ${
+          menuOpen ? "navbar__mobile-overlay--open" : ""
+        }`}
+      >
+        <div className="navbar__mobile-menu">
+          <div className="navbar__mobile-header">
+            {user ? (
+              <div className="navbar__mobile-user">
+                <FaUserCircle className="navbar__mobile-user-icon" />
+                <div>
+                  <p className="navbar__mobile-user-name">
+                    {currentUserData?.userName}
+                  </p>
+                  <p className="navbar__mobile-user-role">{userRole}</p>
+                </div>
+              </div>
+            ) : (
+              <p className="navbar__mobile-guest">Welcome to GlobeTaek</p>
+            )}
+          </div>
+
+          <ul className="navbar__mobile-list">
+            <li className="navbar__mobile-item">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `navbar__mobile-link ${
+                    isActive ? "navbar__mobile-link--active" : ""
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaHome className="navbar__mobile-icon" />
+                Home
+              </NavLink>
+            </li>
+
+            <li className="navbar__mobile-item">
+              <NavLink
+                to="/community"
+                className={({ isActive }) =>
+                  `navbar__mobile-link ${
+                    isActive ? "navbar__mobile-link--active" : ""
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUsers className="navbar__mobile-icon" />
+                Community
+              </NavLink>
+            </li>
+
+            {user && (
+              <li className="navbar__mobile-item">
+                <NavLink
+                  to="/trips"
+                  className={({ isActive }) =>
+                    `navbar__mobile-link ${
+                      isActive ? "navbar__mobile-link--active" : ""
+                    }`
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaMapMarkedAlt className="navbar__mobile-icon" />
+                  Trips
+                </NavLink>
+              </li>
+            )}
+
+            <li className="navbar__mobile-item">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `navbar__mobile-link ${
+                    isActive ? "navbar__mobile-link--active" : ""
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaInfoCircle className="navbar__mobile-icon" />
+                About Us
+              </NavLink>
+            </li>
+
+            {/* Dashboard Links */}
+            {user && (
+              <>
+                <li className="navbar__mobile-item">
+                  <NavLink
+                    to={`/profile/${currentUserData?._id}`}
+                    className={({ isActive }) =>
+                      `navbar__mobile-link ${
+                        isActive ? "navbar__mobile-link--active" : ""
+                      }`
+                    }
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaUserCircle className="navbar__mobile-icon" />
+                    Profile
+                  </NavLink>
+                </li>
+
+                <li className="navbar__mobile-item">
+                  <NavLink
+                    to={
+                      (userRole === "Admin" &&
+                        "/dashboard/admin-manage-profile") ||
+                      (userRole === "Tour Guide" &&
+                        "/dashboard/guide-manage-profile") ||
+                      (userRole === "Tourist" &&
+                        "/dashboard/tourist-manage-profile") ||
+                      "/dashboard"
+                    }
+                    className={({ isActive }) =>
+                      `navbar__mobile-link ${
+                        isActive ? "navbar__mobile-link--active" : ""
+                      }`
+                    }
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <LuLayoutDashboard className="navbar__mobile-icon" />
+                    Dashboard
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+
+          <div className="navbar__mobile-footer">
+            {user ? (
+              <button
+                className="navbar__mobile-signout"
+                onClick={() => {
+                  handleSignOut();
+                  setMenuOpen(false);
+                }}
+              >
+                <FaSignOutAlt className="navbar__mobile-signout-icon" />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                to="/sign-in"
+                className="navbar__mobile-signin"
+                onClick={() => setMenuOpen(false)}
+              >
+                Sign In
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
