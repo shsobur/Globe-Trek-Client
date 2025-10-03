@@ -105,7 +105,7 @@ const Banner = () => {
     <>
       <section
         id="banner_section"
-        className="relative h-screen max-h-[93.8vh] overflow-hidden"
+        className="relative h-screen max-h-[100vh] overflow-hidden"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
