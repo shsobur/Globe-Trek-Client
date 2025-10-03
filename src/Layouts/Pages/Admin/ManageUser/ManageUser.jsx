@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router";
 
 // From react__
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -128,115 +128,156 @@ const ManageUser = () => {
   return (
     <>
       <ScrollToTop></ScrollToTop>
-      <div className="manage__container">
-        <h2 className="manage__title">Manage Users</h2>
+      <div className="manage-users__container">
+        {/* Header Section - Matching Our Design Pattern */}
+        <div className="manage-users__header">
+          <h1 className="manage-users__title">
+            Manage <span className="manage-users__title-accent">Users</span>
+          </h1>
+          <div className="manage-users__title-underline"></div>
+          <p className="manage-users__subtitle">
+            Manage user accounts, roles, and access permissions
+          </p>
+        </div>
 
-        <div className="manage__filterRow">
-          <input
-            type="text"
-            placeholder="Search by name or email"
-            className="manage__search"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
+        {/* Filter Section */}
+        <div className="manage-users__filters">
+          <div className="manage-users__search-box">
+            <input
+              type="text"
+              placeholder="Search by name or email..."
+              className="manage-users__search-input"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <span className="manage-users__search-icon">🔍</span>
+          </div>
 
           <select
-            className="manage__dropdown"
+            className="manage-users__filter-select"
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
           >
-            <option value="">Filter by Role</option>
+            <option value="">All Roles</option>
             <option value="Admin">Admin</option>
             <option value="Tourist">Tourist</option>
             <option value="Tour Guide">Tour Guide</option>
           </select>
         </div>
 
-        <table className="user__table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Action</th>
-              <th>Profile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUsers.length > 0 ? (
-              allUsers.map((user) => (
-                <tr key={user._id}>
-                  <td>{user.userName}</td>
-                  <td>{user.userRole}</td>
-                  <td>{user.userEmail}</td>
-                  <td>{user.gender}</td>
-                  <td>
-                    {user.userRole !== "Admin" && (
-                      <>
-                        {user.status === "Normal" && (
-                          <button
-                            onClick={() => handleUserNormalStatus(user._id)}
-                            className="block__btn"
-                          >
-                            {useBlockLoading ? "Blocking..." : "Block"}
-                          </button>
+        {/* Users Table */}
+        <div className="manage-users__table-container">
+          <table className="manage-users__table">
+            <thead className="manage-users__table-header">
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody className="manage-users__table-body">
+              {allUsers.length > 0 ? (
+                allUsers.map((user) => (
+                  <tr key={user._id} className="manage-users__table-row">
+                    <td className="manage-users__user-name">{user.userName}</td>
+                    <td>
+                      <span
+                        className={`manage-users__role-badge manage-users__role-${user.userRole
+                          ?.toLowerCase()
+                          .replace(" ", "-")}`}
+                      >
+                        {user.userRole}
+                      </span>
+                    </td>
+                    <td className="manage-users__user-email">
+                      {user.userEmail}
+                    </td>
+                    <td>
+                      <span className="manage-users__gender">
+                        {user.gender || "Not specified"}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className={`manage-users__status manage-users__status-${user.status?.toLowerCase()}`}
+                      >
+                        {user.status || "Active"}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="manage-users__actions">
+                        {user.userRole !== "Admin" && (
+                          <>
+                            {user.status === "Normal" && (
+                              <button
+                                onClick={() => handleUserNormalStatus(user._id)}
+                                className="manage-users__block-btn"
+                                disabled={useBlockLoading}
+                              >
+                                {useBlockLoading ? (
+                                  <div className="manage-users__btn-loading">
+                                    <div className="manage-users__btn-spinner"></div>
+                                    Blocking...
+                                  </div>
+                                ) : (
+                                  "Block User"
+                                )}
+                              </button>
+                            )}
+
+                            {user.status === "Block" && (
+                              <button
+                                onClick={() => handleUserBlockStatus(user._id)}
+                                className="manage-users__unblock-btn"
+                                disabled={useBlockLoading}
+                              >
+                                Unblock User
+                              </button>
+                            )}
+                          </>
                         )}
 
-                        {user.status === "Block" && (
-                          <button
-                            onClick={() => handleUserBlockStatus(user._id)}
-                            className="unblock__btn"
+                        {user.userRole !== "Admin" && (
+                          <Link
+                            to={`/profile/${user._id}`}
+                            className="manage-users__profile-btn"
                           >
-                            Unblock
-                          </button>
+                            View Profile
+                          </Link>
                         )}
-                      </>
-                    )}
-                  </td>
-                  <td>
-                    {user.userRole !== "Admin" && (
-                      <button className="profile_btn">
-                        <Link to={`/profile/${user._id}`}>Profile</Link>
-                      </button>
-                    )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr className="manage-users__empty-row">
+                  <td colSpan="6">
+                    <div className="manage-users__empty-state">
+                      {userDataLoading ? (
+                        <div className="manage-users__loading">
+                          <div className="manage-users__loading-spinner"></div>
+                          <p>Loading user data...</p>
+                          <span>Please wait while we fetch the users</span>
+                        </div>
+                      ) : (
+                        <div className="manage-users__no-users">
+                          <div className="manage-users__no-users-icon">👥</div>
+                          <p>No users found</p>
+                          <span>Try adjusting your search or filters</span>
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                {userDataLoading ? (
-                  <td
-                    colSpan="5"
-                    style={{
-                      textAlign: "center",
-                      padding: "20px",
-                      fontSize: "22px",
-                    }}
-                  >
-                    Please wait!
-                    <br />
-                    User data loading...
-                  </td>
-                ) : (
-                  <td
-                    colSpan="5"
-                    style={{
-                      textAlign: "center",
-                      padding: "20px",
-                      fontSize: "22px",
-                    }}
-                  >
-                    No users found.
-                  </td>
-                )}
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );
 };
-
 export default ManageUser;
