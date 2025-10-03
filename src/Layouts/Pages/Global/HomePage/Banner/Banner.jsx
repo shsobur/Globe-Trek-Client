@@ -22,7 +22,6 @@ import image5 from "../../../../../assets/banner-image/Image-5.jpg";
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isHovering, setIsHovering] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const slides = [
@@ -62,7 +61,7 @@ const Banner = () => {
 
   // Auto-play functionality__
   useEffect(() => {
-    if (!isPlaying || isHovering) return;
+    if (!isPlaying) return;
 
     let startTime = Date.now();
     const duration = 4000;
@@ -79,7 +78,7 @@ const Banner = () => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [isPlaying, isHovering, slides.length, currentSlide]);
+  }, [isPlaying, slides.length, currentSlide]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -106,8 +105,6 @@ const Banner = () => {
       <section
         id="banner_section"
         className="relative h-screen max-h-[100vh] overflow-hidden"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
       >
         {/* Background Slides */}
         <div className="relative w-full h-full max-w-[1920px] mx-auto">
@@ -130,6 +127,36 @@ const Banner = () => {
               <div className="absolute inset-0 bg-black/65"></div>
             </div>
           ))}
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 group"
+          >
+            <FaChevronLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 group"
+          >
+            <FaChevronRight className="group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="absolute bottom-8 right-8 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+          >
+            {isPlaying ? <FaPause /> : <FaPlay />}
+          </button>
+
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
+            <div
+              className="h-full bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] transition-all duration-100 ease-linear"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
         </div>
 
         {/* Content Overlay */}
@@ -205,37 +232,6 @@ const Banner = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 group"
-        >
-          <FaChevronLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 group"
-        >
-          <FaChevronRight className="group-hover:translate-x-1 transition-transform duration-300" />
-        </button>
-
-        {/* Play/Pause Button */}
-        <button
-          onClick={togglePlay}
-          className="absolute bottom-8 right-8 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
-        >
-          {isPlaying ? <FaPause /> : <FaPlay />}
-        </button>
-
-        {/* Progress Bar - Pure Tailwind */}
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
-          <div
-            className="h-full bg-gradient-to-r from-[#87ceeb] to-[#b8e6ff] transition-all duration-100 ease-linear"
-            style={{ width: `${progress}%` }}
-          ></div>
         </div>
       </section>
     </>

@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 
 const ManageProfile = () => {
-  const dialogRef = useRef(null);
+  const modalRef = useRef(null);
   const axiosSecure = useAxiosSecure();
   const [status, setStatus] = useState({});
   const { currentUserData } = useUserData();
@@ -32,6 +32,18 @@ const ManageProfile = () => {
         };
     });
   }, [axiosSecure]);
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -75,7 +87,7 @@ const ManageProfile = () => {
             });
 
             reset();
-            dialogRef.current.close();
+            closeModal();
             window.location.reload();
           }
         })
@@ -97,52 +109,56 @@ const ManageProfile = () => {
   return (
     <>
       <ScrollToTop></ScrollToTop>
-      <div className="profile__container">
-        {/* Header Section */}
-        <div className="profile__header">
-          <h1 className="profile__welcome">Administrator Dashboard</h1>
-          <p className="profile__subtitle">
+      <div className="admin-profile__container">
+        {/* Header Section - Matching Our Design Pattern */}
+        <div className="admin-profile__header">
+          <h1 className="admin-profile__title">
+            Administrator{" "}
+            <span className="admin-profile__title-accent font-playfair">Dashboard</span>
+          </h1>
+          <div className="admin-profile__title-underline"></div>
+          <p className="admin-profile__subtitle">
             Welcome back, manage your platform with confidence
           </p>
         </div>
 
         {/* Stats Cards */}
-        <div className="profile__statsRow">
-          <div className="profile__statCard">
-            <div className="profile__statIcon">💰</div>
-            <div className="profile__statContent">
+        <div className="admin-profile__stats-grid">
+          <div className="admin-profile__stat-card">
+            <div className="admin-profile__stat-icon">💰</div>
+            <div className="admin-profile__stat-content">
               <h3>Total Revenue</h3>
               <p>৳{statusLoading ? "..." : status?.totalIncome / 100}</p>
             </div>
           </div>
 
-          <div className="profile__statCard">
-            <div className="profile__statIcon">👥</div>
-            <div className="profile__statContent">
+          <div className="admin-profile__stat-card">
+            <div className="admin-profile__stat-icon">👥</div>
+            <div className="admin-profile__stat-content">
               <h3>Tour Guides</h3>
               <p>{statusLoading ? "..." : status?.totalGuide}</p>
             </div>
           </div>
 
-          <div className="profile__statCard">
-            <div className="profile__statIcon">📦</div>
-            <div className="profile__statContent">
+          <div className="admin-profile__stat-card">
+            <div className="admin-profile__stat-icon">📦</div>
+            <div className="admin-profile__stat-content">
               <h3>Active Packages</h3>
               <p>{statusLoading ? "..." : status?.totalPackage}</p>
             </div>
           </div>
 
-          <div className="profile__statCard">
-            <div className="profile__statIcon">🎯</div>
-            <div className="profile__statContent">
+          <div className="admin-profile__stat-card">
+            <div className="admin-profile__stat-icon">🎯</div>
+            <div className="admin-profile__stat-content">
               <h3>Total Clients</h3>
               <p>{statusLoading ? "..." : status?.totalTourist}</p>
             </div>
           </div>
 
-          <div className="profile__statCard">
-            <div className="profile__statIcon">📖</div>
-            <div className="profile__statContent">
+          <div className="admin-profile__stat-card">
+            <div className="admin-profile__stat-icon">📖</div>
+            <div className="admin-profile__stat-content">
               <h3>Success Stories</h3>
               <p>{statusLoading ? "..." : status?.totalTour}</p>
             </div>
@@ -150,308 +166,288 @@ const ManageProfile = () => {
         </div>
 
         {/* Profile Info Section */}
-        <div className="profile__infoSection">
-          <div className="profile__headerRow">
+        <div className="admin-profile__info-section">
+          <div className="admin-profile__section-header">
             <h2>Administrator Profile</h2>
-            <div className="profile__headerActions">
-              <button
-                onClick={() => dialogRef.current.showModal()}
-                className="profile__editBtn"
-              >
+            <div className="admin-profile__header-actions">
+              <button onClick={openModal} className="admin-profile__edit-btn">
                 Edit Profile
               </button>
             </div>
           </div>
 
-          {/* Edit profile modal */}
-          <dialog
-            ref={dialogRef}
-            className="modal"
-            onClick={(e) =>
-              e.target === dialogRef.current && dialogRef.current.close()
-            }
-          >
-            <div
-              className="modal-box max-w-4xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => dialogRef.current.close()}
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                aria-label="Close modal"
-              >
-                ✕
-              </button>
-
-              <h3 className="text-2xl font-bold text-blue-700 mb-6">
-                Edit Profile Information
-              </h3>
-
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-              >
-                <div>
-                  <label
-                    htmlFor="nameInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="nameInput"
-                    type="text"
-                    defaultValue={currentUserData?.userName}
-                    {...register("userName")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="imageInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Profile Image URL
-                  </label>
-                  <input
-                    id="imageInput"
-                    type="text"
-                    defaultValue={currentUserData?.userPhoto}
-                    {...register("userPhoto")}
-                    className="w-full input input-bordered"
-                    placeholder="https://example.com/image.jpg"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label
-                    htmlFor="bioInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Bio
-                  </label>
-                  <textarea
-                    id="bioInput"
-                    rows="3"
-                    placeholder="Tell about yourself"
-                    defaultValue={currentUserData?.userBio}
-                    {...register("userBio")}
-                    className="w-full textarea textarea-bordered"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="emailInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    id="emailInput"
-                    type="email"
-                    defaultValue={currentUserData?.userEmail}
-                    {...register("userContactEmail")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="addressInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Address
-                  </label>
-                  <input
-                    id="addressInput"
-                    type="text"
-                    placeholder="Bangladesh, Barisal"
-                    defaultValue={currentUserData?.userAddress}
-                    {...register("userAddress")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phoneInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Contact Number
-                  </label>
-                  <input
-                    id="phoneInput"
-                    type="text"
-                    placeholder="+880 123456789"
-                    defaultValue={currentUserData?.userContact}
-                    {...register("userContact")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="nidInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    NID Number
-                  </label>
-                  <input
-                    id="nidInput"
-                    type="number"
-                    placeholder="0123456789"
-                    defaultValue={currentUserData?.userNidNumber}
-                    {...register("userNidNumber")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label
-                    htmlFor="languagesInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Languages
-                  </label>
-                  <input
-                    id="languagesInput"
-                    type="text"
-                    placeholder="Bangla (Native), English (Proficient)"
-                    defaultValue={currentUserData?.languages}
-                    {...register("languages")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label
-                    htmlFor="scheduleInput"
-                    className="block mb-1 font-semibold text-gray-700"
-                  >
-                    Working Schedule
-                  </label>
-                  <input
-                    id="scheduleInput"
-                    type="text"
-                    placeholder="Su - Th, 9:00Am - 10:00Pm"
-                    defaultValue={currentUserData?.available}
-                    {...register("available")}
-                    className="w-full input input-bordered"
-                  />
-                </div>
-
-                <div className="md:col-span-2 text-right mt-4">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn bg-blue-700 text-white hover:bg-blue-800 disabled:opacity-70"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span className="loading loading-spinner"></span>
-                        Saving...
-                      </>
-                    ) : (
-                      "Save Changes"
-                    )}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </dialog>
-
-          <div className="profile__content">
-            <div className="profile__imageWrapper">
-              <img
-                src={currentUserData?.userPhoto}
-                alt="Administrator Profile"
-                className="profile__image"
-              />
-              <div className="profile__statusBadge">Online</div>
+          {/* Profile Content */}
+          <div className="admin-profile__content">
+            <div className="admin-profile__image-section">
+              <div className="admin-profile__image-wrapper">
+                <img
+                  src={currentUserData?.userPhoto}
+                  alt="Administrator Profile"
+                  className="admin-profile__image"
+                />
+                <div className="admin-profile__status">Online</div>
+              </div>
             </div>
 
-            <div className="profile__details">
-              <div className="profile__detailRow">
-                <span className="profile__label">Full Name</span>
-                <span className="profile__value">
+            <div className="admin-profile__details">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Full Name</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userName}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Role</span>
-                <span className="profile__value profile__badge">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Role</span>
+                <span className="admin-profile__badge">
                   {currentUserData?.userRole === "Admin" &&
                     "System Administrator"}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Bio</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Bio</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userBio || (
-                    <span className="text-gray-500">(No Bio)</span>
+                    <span className="admin-profile__empty">(No Bio)</span>
                   )}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Email Address</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Email Address</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userEmail}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Address</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Address</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userAddress || (
-                    <span className="text-gray-500">(No Address)</span>
+                    <span className="admin-profile__empty">(No Address)</span>
                   )}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Contact Number</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Contact Number</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userContact || (
-                    <span className="text-gray-500">(No Contact)</span>
+                    <span className="admin-profile__empty">(No Contact)</span>
                   )}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">NID Number</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">NID Number</span>
+                <span className="admin-profile__value">
                   {currentUserData?.userNidNumber || (
-                    <span className="text-gray-500">(No NID Number)</span>
+                    <span className="admin-profile__empty">
+                      (No NID Number)
+                    </span>
                   )}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Languages</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Languages</span>
+                <span className="admin-profile__value">
                   {currentUserData?.languages || (
-                    <span className="text-gray-500">(No Language)</span>
+                    <span className="admin-profile__empty">(No Language)</span>
                   )}
                 </span>
               </div>
 
-              <div className="profile__detailRow">
-                <span className="profile__label">Working Schedule</span>
-                <span className="profile__value">
+              <div className="admin-profile__detail-row">
+                <span className="admin-profile__label">Working Schedule</span>
+                <span className="admin-profile__value">
                   {currentUserData?.available || (
-                    <span className="text-gray-500">(No Schedule)</span>
+                    <span className="admin-profile__empty">(No Schedule)</span>
                   )}
                 </span>
               </div>
             </div>
           </div>
         </div>
+
+        {/* DaisyUI Modal */}
+        <dialog ref={modalRef} className="modal">
+          <div className="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+
+            <h3 className="font-bold text-2xl text-[#2c5282] mb-6 text-center">
+              Edit Profile Information
+            </h3>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={currentUserData?.userName}
+                    {...register("userName")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Profile Image URL
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={currentUserData?.userPhoto}
+                    {...register("userPhoto")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
+
+                <div className="form-control md:col-span-2">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Bio
+                    </span>
+                  </label>
+                  <textarea
+                    rows="3"
+                    placeholder="Tell about yourself"
+                    defaultValue={currentUserData?.userBio}
+                    {...register("userBio")}
+                    className="textarea textarea-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Email Address
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    defaultValue={currentUserData?.userEmail}
+                    {...register("userContactEmail")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Address
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Bangladesh, Barisal"
+                    defaultValue={currentUserData?.userAddress}
+                    {...register("userAddress")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Contact Number
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="+880 123456789"
+                    defaultValue={currentUserData?.userContact}
+                    {...register("userContact")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      NID Number
+                    </span>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="0123456789"
+                    defaultValue={currentUserData?.userNidNumber}
+                    {...register("userNidNumber")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control md:col-span-2">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Languages
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Bangla (Native), English (Proficient)"
+                    defaultValue={currentUserData?.languages}
+                    {...register("languages")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+
+                <div className="form-control md:col-span-2">
+                  <label className="label">
+                    <span className="label-text font-semibold text-[#2c5282]">
+                      Working Schedule
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Su - Th, 9:00Am - 10:00Pm"
+                    defaultValue={currentUserData?.available}
+                    {...register("available")}
+                    className="input input-bordered w-full focus:border-[#87ceeb] focus:ring-2 focus:ring-[#87ceeb] focus:ring-opacity-20"
+                  />
+                </div>
+              </div>
+
+              <div className="modal-action">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn bg-[#2c5282] text-white hover:bg-[#1e3a8a] border-none"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="loading loading-spinner"></span>
+                      Saving...
+                    </>
+                  ) : (
+                    "Save Changes"
+                  )}
+                </button>
+
+                <form method="dialog">
+                  <button className="btn btn-ghost">Cancel</button>
+                </form>
+              </div>
+            </form>
+          </div>
+
+          {/* Modal backdrop */}
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </div>
     </>
   );
